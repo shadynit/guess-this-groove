@@ -13,6 +13,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [wordsGuessed, setWordsGuessed] = useState(0);
   const [wordKey, setWordKey] = useState(0);
+  const [finished, setFinished] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
   const isTeamA = game.currentTeamIndex === 0;
 
@@ -30,10 +31,11 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   }, []);
 
   useEffect(() => {
-    if (timeLeft === 0) {
+    if (timeLeft === 0 && !finished) {
+      setFinished(true);
       onTurnEnd(wordsGuessed);
     }
-  }, [timeLeft, wordsGuessed, onTurnEnd]);
+  }, [timeLeft, wordsGuessed, onTurnEnd, finished]);
 
   const nextWord = useCallback(() => {
     setCurrentWord(getRandomWord());
@@ -59,67 +61,39 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
         {/* Timer */}
         <div className="relative w-32 h-32 mx-auto mb-8">
           <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
+            <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
             <circle
-              cx="60" cy="60" r="54"
-              fill="none"
-              stroke="hsl(var(--muted))"
-              strokeWidth="8"
-            />
-            <circle
-              cx="60" cy="60" r="54"
-              fill="none"
+              cx="60" cy="60" r="54" fill="none"
               stroke={isUrgent ? "hsl(var(--destructive))" : isTeamA ? "hsl(var(--team-a))" : "hsl(var(--team-b))"}
-              strokeWidth="8"
-              strokeLinecap="round"
+              strokeWidth="8" strokeLinecap="round"
               strokeDasharray={circumference}
               strokeDashoffset={circumference * (1 - progress)}
               className="transition-all duration-1000 linear"
             />
           </svg>
-          <span
-            className={`absolute inset-0 flex items-center justify-center text-4xl font-display font-bold ${
-              isUrgent ? "text-destructive animate-countdown-pulse" : ""
-            }`}
-          >
+          <span className={`absolute inset-0 flex items-center justify-center text-4xl font-display font-bold ${isUrgent ? "text-destructive animate-countdown-pulse" : ""}`}>
             {timeLeft}
           </span>
         </div>
 
         {/* Word */}
-        <div
-          key={wordKey}
-          className="bg-card rounded-xl p-8 mb-6 card-glow border border-border animate-word-reveal"
-        >
+        <div key={wordKey} className="bg-card rounded-xl p-8 mb-6 card-glow border border-border animate-word-reveal">
           <p className="text-sm text-muted-foreground mb-2 uppercase tracking-widest">Describe this word</p>
           <h2 className="text-4xl sm:text-5xl font-bold font-display text-glow-accent text-accent leading-tight">
             {currentWord}
           </h2>
         </div>
 
-        {/* Score this turn */}
         <p className="text-muted-foreground mb-6">
           Words guessed: <span className="text-foreground font-bold text-xl">{wordsGuessed}</span>
         </p>
 
-        {/* Actions */}
         <div className="flex gap-4">
-          <button
-            onClick={handleSkip}
-            className="flex-1 py-4 rounded-lg bg-muted text-muted-foreground font-display font-semibold text-lg transition-all hover:bg-muted/80 active:scale-95 flex items-center justify-center gap-2"
-          >
-            <SkipForward className="w-5 h-5" />
-            Skip
+          <button onClick={handleSkip} className="flex-1 py-4 rounded-lg bg-muted text-muted-foreground font-display font-semibold text-lg transition-all hover:bg-muted/80 active:scale-95 flex items-center justify-center gap-2">
+            <SkipForward className="w-5 h-5" /> Skip
           </button>
-          <button
-            onClick={handleCorrect}
-            className={`flex-1 py-4 rounded-lg font-display font-semibold text-lg transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg ${
-              isTeamA
-                ? "bg-team-a text-team-a-foreground shadow-team-a/30"
-                : "bg-team-b text-team-b-foreground shadow-team-b/30"
-            }`}
-          >
-            <Check className="w-5 h-5" />
-            Got it!
+          <button onClick={handleCorrect} className={`flex-1 py-4 rounded-lg font-display font-semibold text-lg transition-all active:scale-95 flex items-center justify-center gap-2 shadow-lg ${isTeamA ? "bg-team-a text-team-a-foreground shadow-team-a/30" : "bg-team-b text-team-b-foreground shadow-team-b/30"}`}>
+            <Check className="w-5 h-5" /> Got it!
           </button>
         </div>
       </div>

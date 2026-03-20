@@ -25,11 +25,11 @@ export const WORD_BANK: string[] = [
   "Doohickey", "Whatchamacallit", "Hodgepodge", "Rigmarole", "Brouhaha"
 ];
 
-let usedIndices: Set<number> = [];
+let usedIndices = new Set<number>();
 
 export function getRandomWord(): string {
   if (usedIndices.size >= WORD_BANK.length) {
-    usedIndices = new Set();
+    usedIndices = new Set<number>();
   }
   let index: number;
   do {
@@ -40,5 +40,5 @@ export function getRandomWord(): string {
 }
 
 export function resetWords() {
-  usedIndices = new Set();
+  usedIndices = new Set<number>();
 }
