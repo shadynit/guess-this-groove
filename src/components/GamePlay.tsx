@@ -9,7 +9,7 @@ interface GamePlayProps {
 }
 
 export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
-  const [timeLeft, setTimeLeft] = useState(game.roundTime);
+  const [timeLeft, setTimeLeft] = useState<number>(game.roundTime);
   const [currentWord, setCurrentWord] = useState(() => getRandomWord());
   const [wordsGuessed, setWordsGuessed] = useState(0);
   const [wordKey, setWordKey] = useState(0);
