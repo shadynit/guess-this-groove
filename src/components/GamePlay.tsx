@@ -21,6 +21,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
     }))
   );
   const [finished, setFinished] = useState(false);
+  const [splashDismissed, setSplashDismissed] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
   const isTeamA = game.currentTeamIndex === 0;
 
