@@ -41,7 +41,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   const timedOut = timeLeft === 0;
 
   const toggleWord = (index: number) => {
-    if (finished) return;
+    if (finished || !splashDismissed) return;
     setWords((prev) =>
       prev.map((w, i) => (i === index ? { ...w, guessed: !w.guessed } : w))
     );
