@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { getRandomWord } from "@/lib/words";
+import { playBuzzer } from "@/lib/buzzer";
 import { GameState } from "@/lib/gameTypes";
 
 interface GamePlayProps {
@@ -40,6 +41,9 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
 
   const timedOut = timeLeft === 0;
 
+  useEffect(() => {
+    if (timedOut) playBuzzer();
+  }, [timedOut]);
   const toggleWord = (index: number) => {
     if (finished || !splashDismissed) return;
     setWords((prev) =>
