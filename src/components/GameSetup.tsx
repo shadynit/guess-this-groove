@@ -57,6 +57,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
         },
       ],
       roundTime,
+      wordsPerTurn,
       totalRounds,
       phase: "ready",
     };
