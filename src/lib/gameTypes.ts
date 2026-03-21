@@ -17,6 +17,7 @@ export interface GameState {
   totalRounds: number;
   currentRound: number;
   phase: "setup" | "ready" | "playing" | "turnEnd" | "gameOver";
+  adultMode: boolean;
 }
 
 export const DEFAULT_GAME_STATE: GameState = {
@@ -31,4 +32,5 @@ export const DEFAULT_GAME_STATE: GameState = {
   totalRounds: 4,
   currentRound: 1,
   phase: "setup",
+  adultMode: false,
 };

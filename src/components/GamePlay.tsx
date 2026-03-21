@@ -17,7 +17,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   const [timeLeft, setTimeLeft] = useState<number>(game.roundTime);
   const [words, setWords] = useState<WordItem[]>(() =>
     Array.from({ length: game.wordsPerTurn }, () => ({
-      word: getRandomWord(),
+      word: getRandomWord(game.adultMode),
       guessed: false,
     }))
   );

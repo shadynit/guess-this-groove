@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, ShieldAlert } from "lucide-react";
 
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
@@ -14,6 +14,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
   const [wordsPerTurn, setWordsPerTurn] = useState<5 | 6>(5);
   const [totalRounds, setTotalRounds] = useState(4);
+  const [adultMode, setAdultMode] = useState(false);
 
   const addPlayer = (team: "a" | "b") => {
     if (team === "a") setTeamAPlayers([...teamAPlayers, ""]);
@@ -59,6 +60,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       roundTime,
       wordsPerTurn,
       totalRounds,
+      adultMode,
       phase: "ready",
     };
     onStartGame(state);
@@ -226,6 +228,24 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 ))}
               </div>
             </div>
+          </div>
+
+          {/* 18+ Toggle */}
+          <div className="flex-1">
+            <div className="flex items-center gap-2 mb-3">
+              <ShieldAlert className="w-4 h-4 text-destructive" />
+              <span className="text-sm font-medium">18+ Words</span>
+            </div>
+            <button
+              onClick={() => setAdultMode(!adultMode)}
+              className={`w-full py-2 rounded-md text-sm font-semibold transition-all active:scale-95 ${
+                adultMode
+                  ? "bg-destructive text-destructive-foreground shadow-lg shadow-destructive/25"
+                  : "bg-muted text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {adultMode ? "🔥 ON" : "OFF"}
+            </button>
           </div>
         </div>
 
