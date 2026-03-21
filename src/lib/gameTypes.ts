@@ -32,4 +32,5 @@ export const DEFAULT_GAME_STATE: GameState = {
   totalRounds: 4,
   currentRound: 1,
   phase: "setup",
+  adultMode: false,
 };
