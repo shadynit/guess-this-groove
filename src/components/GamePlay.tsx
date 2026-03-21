@@ -1,5 +1,6 @@
 import { useState, useEffect, useRef } from "react";
 import { getRandomWord } from "@/lib/words";
+import { playBuzzer } from "@/lib/buzzer";
 import { GameState } from "@/lib/gameTypes";
 
 interface GamePlayProps {
