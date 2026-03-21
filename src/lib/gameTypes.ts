@@ -27,6 +27,7 @@ export const DEFAULT_GAME_STATE: GameState = {
   currentTeamIndex: 0,
   currentPlayerIndex: 0,
   roundTime: 30,
+  wordsPerTurn: 5,
   totalRounds: 4,
   currentRound: 1,
   phase: "setup",
