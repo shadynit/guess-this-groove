@@ -80,7 +80,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
         </div>
 
         <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">
-          Tap words your team guesses
+          {timedOut && !finished ? "⏰ Time's up! Review & confirm selections" : "Tap words your team guesses"}
         </p>
 
         {/* Word list */}
