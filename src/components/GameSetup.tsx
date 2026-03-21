@@ -60,6 +60,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       roundTime,
       wordsPerTurn,
       totalRounds,
+      adultMode,
       phase: "ready",
     };
     onStartGame(state);
