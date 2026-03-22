@@ -176,6 +176,21 @@ export default function GamePlay({ game, onTurnEnd, onNewGame }: GamePlayProps) 
           )}
         </div>
       </div>
+
+      <AlertDialog open={showNewGameConfirm} onOpenChange={setShowNewGameConfirm}>
+        <AlertDialogContent>
+          <AlertDialogHeader>
+            <AlertDialogTitle>Start a New Game?</AlertDialogTitle>
+            <AlertDialogDescription>
+              This will reset all scores and progress. Are you sure you want to start over?
+            </AlertDialogDescription>
+          </AlertDialogHeader>
+          <AlertDialogFooter>
+            <AlertDialogCancel>Cancel</AlertDialogCancel>
+            <AlertDialogAction onClick={onNewGame}>Yes, Reset</AlertDialogAction>
+          </AlertDialogFooter>
+        </AlertDialogContent>
+      </AlertDialog>
     </div>
   );
 }

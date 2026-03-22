@@ -81,6 +81,17 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           </p>
         </div>
 
+        {/* Game Instructions */}
+        <div className="bg-card rounded-lg p-5 border border-border mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <BookOpen className="w-5 h-5 text-primary" />
+            <span className="text-lg font-display font-semibold">How to Play</span>
+          </div>
+          <p className="text-sm text-muted-foreground leading-relaxed">
+            The goal of the game is to explain as many words as possible within 30 seconds or a defined time and have your teammates guess the words. You are not allowed to use parts of the word or a translation in a different language. You get a point for every correct word.
+          </p>
+        </div>
+
         {/* Teams */}
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-6 mb-8">
           {/* Team A */}
