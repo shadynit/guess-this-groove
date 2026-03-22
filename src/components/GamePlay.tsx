@@ -6,6 +6,7 @@ import { GameState } from "@/lib/gameTypes";
 interface GamePlayProps {
   game: GameState;
   onTurnEnd: (wordsGuessed: number) => void;
+  onNewGame: () => void;
 }
 
 interface WordItem {
