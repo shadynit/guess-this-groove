@@ -111,7 +111,7 @@ export default function GamePlay({ game, onTurnEnd, onNewGame }: GamePlayProps) 
       <div className="w-full max-w-sm flex flex-col items-center flex-1 min-h-0">
         {/* New Game button */}
         <div className="w-full flex justify-end mb-1 shrink-0">
-          <button onClick={onNewGame} className="text-xs text-muted-foreground underline">New Game</button>
+          <button onClick={() => setShowNewGameConfirm(true)} className="text-xs text-muted-foreground underline">New Game</button>
         </div>
 
         {/* Timer */}
