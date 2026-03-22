@@ -44,9 +44,9 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   useEffect(() => {
     if (timedOut) playBuzzer();
   }, [timedOut]);
+
   const toggleWord = (index: number) => {
     if (finished) return;
-    // During gameplay: always allow. After timeout: only after splash dismissed.
     if (timedOut && !splashDismissed) return;
     setWords((prev) =>
       prev.map((w, i) => (i === index ? { ...w, guessed: !w.guessed } : w))
@@ -66,7 +66,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   const guessedCount = words.filter((w) => w.guessed).length;
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-between px-4 py-6 safe-area-inset relative">
+    <div className="h-[100dvh] flex flex-col items-center px-4 py-3 safe-area-inset relative overflow-hidden">
       {/* Time's Up Splash Overlay */}
       {timedOut && !splashDismissed && (
         <div className="fixed inset-0 z-50 flex flex-col items-center justify-center bg-background/95 backdrop-blur-sm animate-in fade-in duration-300">
@@ -92,9 +92,9 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
         </div>
       )}
 
-      <div className="w-full max-w-sm flex flex-col items-center flex-1">
+      <div className="w-full max-w-sm flex flex-col items-center flex-1 min-h-0">
         {/* Timer */}
-        <div className="relative w-24 h-24 mx-auto mb-4 shrink-0">
+        <div className="relative w-20 h-20 mx-auto mb-2 shrink-0">
           <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
             <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
             <circle
@@ -106,23 +106,23 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
               className="transition-all duration-1000 linear"
             />
           </svg>
-          <span className={`absolute inset-0 flex items-center justify-center text-2xl font-display font-bold ${isUrgent ? "text-destructive animate-countdown-pulse" : ""}`}>
+          <span className={`absolute inset-0 flex items-center justify-center text-xl font-display font-bold ${isUrgent ? "text-destructive animate-countdown-pulse" : ""}`}>
             {timeLeft}
           </span>
         </div>
 
-        <p className="text-xs text-muted-foreground uppercase tracking-widest mb-4">
+        <p className="text-xs text-muted-foreground uppercase tracking-widest mb-2 shrink-0">
           {timedOut && splashDismissed && !finished ? "⏰ Review & confirm selections" : "Tap words your team guesses"}
         </p>
 
         {/* Word list */}
-        <div className="w-full space-y-3 flex-1">
+        <div className="w-full flex-1 min-h-0 flex flex-col gap-2 justify-center">
           {words.map((w, i) => (
             <button
               key={i}
               onClick={() => toggleWord(i)}
               disabled={!splashDismissed && timedOut}
-              className={`w-full py-4 px-5 rounded-xl text-xl font-display font-bold transition-all active:scale-[0.97] border-2 text-left ${
+              className={`w-full py-3 px-4 rounded-xl text-lg font-display font-bold transition-all active:scale-[0.97] border-2 text-left ${
                 w.guessed
                   ? "bg-green-500/15 border-green-500/50 text-green-400"
                   : "bg-card border-border text-foreground hover:border-muted-foreground/30"
@@ -137,14 +137,14 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
         </div>
 
         {/* Score + Done */}
-        <div className="w-full mt-6 shrink-0">
-          <p className="text-center text-muted-foreground text-sm mb-3">
+        <div className="w-full mt-2 shrink-0">
+          <p className="text-center text-muted-foreground text-sm mb-2">
             <span className={isTeamA ? "text-team-a" : "text-team-b"}>{guessedCount}</span> / {words.length} guessed
           </p>
           {timedOut && splashDismissed && !finished && (
             <button
               onClick={handleDone}
-              className={`w-full py-4 rounded-lg font-display font-bold text-lg transition-all active:scale-95 shadow-lg ${
+              className={`w-full py-3 rounded-lg font-display font-bold text-lg transition-all active:scale-95 shadow-lg ${
                 isTeamA
                   ? "bg-team-a text-team-a-foreground shadow-team-a/30"
                   : "bg-team-b text-team-b-foreground shadow-team-b/30"

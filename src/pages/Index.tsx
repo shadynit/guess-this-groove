@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { GameState, DEFAULT_GAME_STATE } from "@/lib/gameTypes";
 import { resetWords } from "@/lib/words";
 import GameSetup from "@/components/GameSetup";
@@ -7,9 +7,47 @@ import GamePlay from "@/components/GamePlay";
 import TurnEndScreen from "@/components/TurnEndScreen";
 import GameOverScreen from "@/components/GameOverScreen";
 
+const STORAGE_KEY = "wordrush_game_state";
+
+const loadGameState = (): GameState => {
+  try {
+    const saved = sessionStorage.getItem(STORAGE_KEY);
+    if (saved) {
+      const parsed = JSON.parse(saved) as GameState;
+      // If was in "playing" phase, go back to "ready" (timer can't resume)
+      if (parsed.phase === "playing") {
+        return { ...parsed, phase: "ready" };
+      }
+      return parsed;
+    }
+  } catch {}
+  return DEFAULT_GAME_STATE;
+};
+
+const saveGameState = (state: GameState) => {
+  try {
+    sessionStorage.setItem(STORAGE_KEY, JSON.stringify(state));
+  } catch {}
+};
+
+const clearGameState = () => {
+  try {
+    sessionStorage.removeItem(STORAGE_KEY);
+  } catch {}
+};
+
 const Index = () => {
-  const [game, setGame] = useState<GameState>(DEFAULT_GAME_STATE);
+  const [game, setGame] = useState<GameState>(loadGameState);
   const [lastScore, setLastScore] = useState(0);
+
+  // Persist game state on every change
+  useEffect(() => {
+    if (game.phase === "setup") {
+      clearGameState();
+    } else {
+      saveGameState(game);
+    }
+  }, [game]);
 
   const handleStartGame = (state: GameState) => {
     resetWords();
@@ -58,6 +96,7 @@ const Index = () => {
 
   const handlePlayAgain = () => {
     resetWords();
+    clearGameState();
     setGame(DEFAULT_GAME_STATE);
   };
 
