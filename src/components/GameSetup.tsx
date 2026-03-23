@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE } from "@/lib/gameTypes";
 import { Plus, X, Users, Timer, Zap, ShieldAlert, BookOpen } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
@@ -71,6 +72,10 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-2xl animate-slide-up-fade">
+        {/* Theme toggle */}
+        <div className="flex justify-end mb-2">
+          <ThemeToggle />
+        </div>
         {/* Title */}
         <div className="text-center mb-10">
           <h1 className="text-5xl sm:text-6xl font-bold text-glow tracking-tight leading-none mb-3">
