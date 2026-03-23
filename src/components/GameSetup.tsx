@@ -1,6 +1,7 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE } from "@/lib/gameTypes";
 import { Plus, X, Users, Timer, Zap, ShieldAlert, BookOpen } from "lucide-react";
+import ThemeToggle from "@/components/ThemeToggle";
 
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
