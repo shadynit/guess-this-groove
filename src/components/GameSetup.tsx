@@ -275,24 +275,35 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 />
               </div>
             </div>
-          </div>
+        </div>
 
-          {/* 18+ Toggle */}
-          <div className="flex-1">
-            <div className="flex items-center gap-2 mb-3">
-              <ShieldAlert className="w-4 h-4 text-destructive" />
-              <span className="text-sm font-medium">18+ Words</span>
-            </div>
-            <button
-              onClick={() => setAdultMode(!adultMode)}
-              className={`w-full py-2 rounded-md text-sm font-semibold transition-all active:scale-95 ${
-                adultMode
-                  ? "bg-destructive text-destructive-foreground shadow-lg shadow-destructive/25"
-                  : "bg-muted text-muted-foreground hover:text-foreground"
-              }`}
-            >
-              {adultMode ? "🔥 ON" : "OFF"}
-            </button>
+        {/* Word Categories */}
+        <div className="bg-card rounded-lg p-5 card-glow border border-border mb-8">
+          <div className="flex items-center gap-2 mb-3">
+            <Tags className="w-4 h-4 text-primary" />
+            <span className="text-sm font-medium">Word Categories</span>
+          </div>
+          <div className="flex flex-wrap gap-2">
+            {(Object.keys(CATEGORY_LABELS) as WordCategory[]).map((cat) => {
+              const isSelected = selectedCategories.includes(cat);
+              const isAdult = cat === "adult";
+              return (
+                <button
+                  key={cat}
+                  onClick={() => toggleCategory(cat)}
+                  className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95 flex items-center gap-1 ${
+                    isSelected
+                      ? isAdult
+                        ? "bg-destructive text-destructive-foreground shadow-sm"
+                        : "bg-primary text-primary-foreground shadow-sm"
+                      : "bg-muted text-muted-foreground hover:text-foreground"
+                  }`}
+                >
+                  {isSelected && <Check className="w-3 h-3" />}
+                  {CATEGORY_LABELS[cat]}
+                </button>
+              );
+            })}
           </div>
         </div>
 
