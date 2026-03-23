@@ -275,6 +275,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 />
               </div>
             </div>
+          </div>
         </div>
 
         {/* Word Categories */}
