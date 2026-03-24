@@ -1,9 +1,10 @@
 import { GameState } from "@/lib/gameTypes";
-import { Eye, EyeOff, BookOpen } from "lucide-react";
+import { Eye, EyeOff, RotateCcw } from "lucide-react";
 
 interface ReadyScreenProps {
   game: GameState;
   onStart: () => void;
+  onNewGame: () => void;
 }
 
 export default function ReadyScreen({ game, onStart }: ReadyScreenProps) {
