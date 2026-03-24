@@ -10,7 +10,7 @@ interface TurnEndScreenProps {
   onNewGame: () => void;
 }
 
-export default function TurnEndScreen({ game, lastScore, onNext, isLastTurn }: TurnEndScreenProps) {
+export default function TurnEndScreen({ game, lastScore, onNext, isLastTurn, onNewGame }: TurnEndScreenProps) {
   const team = game.teams[game.currentTeamIndex];
   const player = team.players[game.currentPlayerIndex];
   const isTeamA = game.currentTeamIndex === 0;
