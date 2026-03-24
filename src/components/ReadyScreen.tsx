@@ -79,6 +79,14 @@ export default function ReadyScreen({ game, onStart, onNewGame }: ReadyScreenPro
         >
           I'm Ready — Show the Word!
         </button>
+
+        <button
+          onClick={onNewGame}
+          className="mt-4 flex items-center justify-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mx-auto"
+        >
+          <RotateCcw className="w-3.5 h-3.5" />
+          New Game
+        </button>
       </div>
     </div>
   );
