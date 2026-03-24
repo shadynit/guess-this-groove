@@ -7,7 +7,7 @@ interface ReadyScreenProps {
   onNewGame: () => void;
 }
 
-export default function ReadyScreen({ game, onStart }: ReadyScreenProps) {
+export default function ReadyScreen({ game, onStart, onNewGame }: ReadyScreenProps) {
   const team = game.teams[game.currentTeamIndex];
   const player = team.players[game.currentPlayerIndex];
   const isTeamA = game.currentTeamIndex === 0;
