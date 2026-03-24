@@ -43,8 +43,8 @@ export interface GameState {
 
 export const DEFAULT_GAME_STATE: GameState = {
   teams: [
-    { name: "Team Alpha", players: [], score: 0 },
-    { name: "Team Beta", players: [], score: 0 },
+    { name: "Team Alpha", players: [], score: 0, roundsPlayed: 0 },
+    { name: "Team Beta", players: [], score: 0, roundsPlayed: 0 },
   ],
   currentTeamIndex: 0,
   currentPlayerIndex: 0,
