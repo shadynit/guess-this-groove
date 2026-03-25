@@ -366,6 +366,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
         >
           {canStart ? "Let's Go!" : "Add at least 2 players per team"}
         </button>
+
+        <InstallPrompt />
       </div>
     </div>
   );
