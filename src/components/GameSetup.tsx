@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
 
 interface GameSetupProps {
