@@ -60,11 +60,17 @@ const Index = () => {
     setLastScore(wordsGuessed);
     setGame((g) => {
       const newTeams = [...g.teams] as [typeof g.teams[0], typeof g.teams[1]];
-      newTeams[g.currentTeamIndex] = {
-        ...newTeams[g.currentTeamIndex],
-        score: newTeams[g.currentTeamIndex].score + wordsGuessed,
-        roundsPlayed: newTeams[g.currentTeamIndex].roundsPlayed + 1,
+      const currentTeam = { ...newTeams[g.currentTeamIndex] };
+      currentTeam.score = currentTeam.score + wordsGuessed;
+      currentTeam.roundsPlayed = currentTeam.roundsPlayed + 1;
+      // Track individual player score
+      const updatedPlayers = [...currentTeam.players];
+      updatedPlayers[g.currentPlayerIndex] = {
+        ...updatedPlayers[g.currentPlayerIndex],
+        score: updatedPlayers[g.currentPlayerIndex].score + wordsGuessed,
       };
+      currentTeam.players = updatedPlayers;
+      newTeams[g.currentTeamIndex] = currentTeam;
       return { ...g, teams: newTeams, phase: "turnEnd" };
     });
   }, []);
