@@ -80,13 +80,13 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       teams: [
         {
           name: teamAName || "Team Alpha",
-          players: teamAPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim() })),
+          players: teamAPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim(), score: 0 })),
           score: 0,
           roundsPlayed: 0,
         },
         {
           name: teamBName || "Team Beta",
-          players: teamBPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim() })),
+          players: teamBPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim(), score: 0 })),
           score: 0,
           roundsPlayed: 0,
         },
@@ -140,8 +140,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <input
                 value={teamAName}
                 onChange={(e) => setTeamAName(e.target.value)}
-                className="bg-transparent border-none text-team-a font-display text-xl font-semibold outline-none w-full placeholder:text-team-a/40"
-                placeholder="Team name"
+                className="bg-transparent border-b border-dashed border-team-a/40 text-team-a font-display text-xl font-semibold outline-none w-full placeholder:text-team-a/40 focus:border-team-a transition-colors cursor-text"
+                placeholder="Team name ✏️"
               />
             </div>
             <div className="space-y-2">
@@ -179,8 +179,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <input
                 value={teamBName}
                 onChange={(e) => setTeamBName(e.target.value)}
-                className="bg-transparent border-none text-team-b font-display text-xl font-semibold outline-none w-full placeholder:text-team-b/40"
-                placeholder="Team name"
+                className="bg-transparent border-b border-dashed border-team-b/40 text-team-b font-display text-xl font-semibold outline-none w-full placeholder:text-team-b/40 focus:border-team-b transition-colors cursor-text"
+                placeholder="Team name ✏️"
               />
             </div>
             <div className="space-y-2">
