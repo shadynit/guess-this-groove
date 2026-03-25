@@ -2,6 +2,7 @@ import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
 import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff } from "lucide-react";
 import ThemeToggle from "@/components/ThemeToggle";
+import InstallPrompt from "@/components/InstallPrompt";
 
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
@@ -365,6 +366,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
         >
           {canStart ? "Let's Go!" : "Add at least 2 players per team"}
         </button>
+
+        <InstallPrompt />
       </div>
     </div>
   );
