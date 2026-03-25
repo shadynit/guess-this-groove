@@ -1,5 +1,6 @@
 import { GameState } from "@/lib/gameTypes";
-import { Eye, EyeOff, RotateCcw } from "lucide-react";
+import { Eye, EyeOff } from "lucide-react";
+import NewGameConfirmDialog from "@/components/NewGameConfirmDialog";
 
 interface ReadyScreenProps {
   game: GameState;
@@ -21,11 +22,7 @@ export default function ReadyScreen({ game, onStart, onNewGame }: ReadyScreenPro
         </p>
 
         {/* Team name */}
-        <h2
-          className={`text-4xl font-bold mb-2 ${
-            isTeamA ? "text-team-a" : "text-team-b"
-          }`}
-        >
+        <h2 className={`text-4xl font-bold mb-2 ${isTeamA ? "text-team-a" : "text-team-b"}`}>
           {team.name}
         </h2>
 
@@ -44,17 +41,22 @@ export default function ReadyScreen({ game, onStart, onNewGame }: ReadyScreenPro
           </div>
         </div>
 
-        {/* Round progress */}
-        <div className="mb-4">
-          <p className="text-xs text-muted-foreground mb-1.5 uppercase tracking-widest">
-            Round {game.currentRound} of {game.totalRounds}
-          </p>
-          <div className="w-full h-2 bg-muted rounded-full overflow-hidden">
-            <div
-              className="h-full bg-primary rounded-full transition-all duration-500"
-              style={{ width: `${(game.currentRound / game.totalRounds) * 100}%` }}
-            />
-          </div>
+        {/* Per-team round progress */}
+        <div className="flex gap-4 justify-center mb-4">
+          {game.teams.map((t, idx) => {
+            const isA = idx === 0;
+            return (
+              <div key={idx} className="flex-1">
+                <p className="text-xs text-muted-foreground mb-1">{t.name} — {t.roundsPlayed}/{game.totalRounds} rounds</p>
+                <div className="w-full h-1.5 bg-muted rounded-full overflow-hidden">
+                  <div
+                    className={`h-full rounded-full transition-all duration-500 ${isA ? "bg-team-a" : "bg-team-b"}`}
+                    style={{ width: `${(t.roundsPlayed / game.totalRounds) * 100}%` }}
+                  />
+                </div>
+              </div>
+            );
+          })}
         </div>
 
         {/* Scores */}
@@ -80,13 +82,7 @@ export default function ReadyScreen({ game, onStart, onNewGame }: ReadyScreenPro
           I'm Ready — Show the Word!
         </button>
 
-        <button
-          onClick={onNewGame}
-          className="mt-4 flex items-center justify-center gap-1.5 text-sm text-muted-foreground hover:text-foreground transition-colors mx-auto"
-        >
-          <RotateCcw className="w-3.5 h-3.5" />
-          New Game
-        </button>
+        <NewGameConfirmDialog onConfirm={onNewGame} />
       </div>
     </div>
   );

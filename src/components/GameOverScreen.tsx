@@ -1,5 +1,5 @@
 import { GameState } from "@/lib/gameTypes";
-import { Crown, RotateCcw, Trophy } from "lucide-react";
+import { Crown, RotateCcw, Trophy, Medal } from "lucide-react";
 
 interface GameOverScreenProps {
   game: GameState;
@@ -38,7 +38,11 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
           {sortedTeams.map(({ team, originalIndex }, rank) => {
             const isWinner = !isTie && rank === 0;
             const isA = originalIndex === 0;
-            const topPlayers = team.players.slice(0, 3);
+            // Sort players by score descending, take top 3
+            const rankedPlayers = [...team.players].sort((a, b) => b.score - a.score);
+            const topPlayers = rankedPlayers.slice(0, 3);
+            const medalIcons = ["🥇", "🥈", "🥉"];
+
             return (
               <div
                 key={originalIndex}
@@ -83,23 +87,27 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
                     }}
                   />
                 </div>
-                {/* Top 3 players */}
+                {/* Top 3 players ranked by score */}
                 {topPlayers.length > 0 && (
-                  <div className="mt-3 flex flex-wrap gap-1.5">
+                  <div className="mt-3 space-y-1">
                     {topPlayers.map((p, i) => (
-                      <span
+                      <div
                         key={i}
-                        className={`text-xs px-2 py-0.5 rounded-full ${
-                          isA ? "bg-team-a/10 text-team-a" : "bg-team-b/10 text-team-b"
+                        className={`flex items-center justify-between text-xs px-2.5 py-1 rounded-md ${
+                          isA ? "bg-team-a/10" : "bg-team-b/10"
                         }`}
                       >
-                        {p.name}
-                      </span>
+                        <span className={`flex items-center gap-1.5 font-medium ${isA ? "text-team-a" : "text-team-b"}`}>
+                          <span>{medalIcons[i] ?? ""}</span>
+                          {p.name}
+                        </span>
+                        <span className="text-muted-foreground font-semibold">{p.score} pts</span>
+                      </div>
                     ))}
                     {team.players.length > 3 && (
-                      <span className="text-xs px-2 py-0.5 rounded-full bg-muted text-muted-foreground">
-                        +{team.players.length - 3} more
-                      </span>
+                      <p className="text-xs text-muted-foreground pl-2">
+                        +{team.players.length - 3} more players
+                      </p>
                     )}
                   </div>
                 )}
