@@ -7,149 +7,204 @@ interface WordEntry {
 }
 
 const WORD_BANK: WordEntry[] = [
-  // Funny & silly
-  ...(["Snoring", "Twerking", "Hiccups", "Burrito", "Selfie", "Moonwalk",
-    "Pickles", "Sneeze", "Mullet", "Waddle", "Booger", "Drool",
-    "Yodel", "Pajamas", "Flamingo", "Tickle", "Wedgie", "Spaghetti",
-    "Potty", "Goofy", "Wobbly", "Jiggly", "Funky", "Wacky",
-    "Oink", "Squawk", "Gobble", "Quack", "Moo",
-    "Bubblegum", "Unicorn", "Underwear", "Mustache", "Tutu",
-    "Suspenders", "Caterpillar", "Jellyfish", "Trampoline", "Carousel",
-    "Marshmallow", "Popcorn", "Somersault", "Cartwheel", "Limbo",
-    "Hopscotch", "Leapfrog", "Kazoo", "Tambourine", "Cowbell",
-    "Bagpipes", "Ukulele", "Pirate", "Ninja", "Werewolf",
-    "Sasquatch", "Bamboozle", "Shenanigans", "Hullabaloo", "Kerfuffle",
-    "Razzmatazz", "Gobbledygook", "Thingamajig", "Doohickey", "Brouhaha",
-    "Rigmarole", "Hodgepodge", "Slapstick", "Goofball", "Cringe",
-    "Butterfingers", "Giggle", "Snicker", "Chortle",
-    "Guffaw", "Cackle", "Bonkers", "Bananas", "Weirdo",
+  // ===== EASY WORDS (70%) =====
+  
+  // Funny & silly (easy)
+  ...(["Snoring", "Hiccups", "Selfie", "Pickles", "Sneeze", "Drool",
+    "Pajamas", "Tickle", "Popcorn", "Bubble", "Giggle", "Clumsy",
+    "Silly", "Goofy", "Wobbly", "Jiggly", "Funky", "Wacky",
+    "Oink", "Quack", "Moo", "Burp", "Yawn", "Blink",
+    "Grin", "Smile", "Laugh", "Dizzy", "Fuzzy", "Fluffy",
+    "Squishy", "Bouncy", "Wiggly", "Zappy", "Loopy", "Nutty",
+    "Dorky", "Nerdy", "Clunky", "Cranky", "Grumpy", "Jumpy",
+    "Perky", "Quirky", "Snappy", "Zippy", "Cheesy", "Corny",
   ] as const).map(w => ({ word: w, adult: false, category: "funny" as WordCategory })),
 
-  // Animals
-  ...(["Platypus", "Blobfish", "Porcupine", "Sloth", "Armadillo",
-    "Chipmunk", "Walrus", "Chameleon", "Pelican", "Hedgehog",
-    "Warthog", "Baboon", "Iguana", "Llama", "Narwhal",
-    "Alpaca", "Pangolin", "Manatee", "Toucan", "Lemur",
-    "Gecko", "Stingray", "Hyena", "Ostrich", "Seahorse",
-    "Tarantula", "Poodle", "Bullfrog", "Hamster", "Dodo",
-    "Cheetah", "Vulture", "Mongoose", "Piranha", "Macaw",
+  // Animals (easy)
+  ...(["Puppy", "Kitten", "Bunny", "Monkey", "Parrot", "Penguin",
+    "Dolphin", "Turtle", "Chicken", "Duck", "Frog", "Bear",
+    "Tiger", "Lion", "Elephant", "Giraffe", "Zebra", "Horse",
+    "Pig", "Cow", "Sheep", "Goat", "Mouse", "Rabbit",
+    "Snake", "Fish", "Bird", "Owl", "Eagle", "Shark",
+    "Whale", "Crab", "Snail", "Ant", "Bee", "Spider",
+    "Panda", "Koala", "Hippo", "Donkey", "Camel", "Fox",
+    "Wolf", "Deer", "Squirrel", "Otter", "Seal", "Bat",
+    "Lizard", "Goldfish", "Pigeon", "Crow", "Hawk", "Goose",
+    "Swan", "Moose", "Skunk", "Raccoon", "Beaver", "Pony",
   ] as const).map(w => ({ word: w, adult: false, category: "animals" as WordCategory })),
 
-  // Food
-  ...(["Waffle", "Meatball", "Taco", "Pretzel", "Pancake",
-    "Milkshake", "Nacho", "Dumpling", "Churro", "Corndog",
-    "Pudding", "Fudge", "Guacamole", "Fondue", "Biscuit",
-    "Crouton", "Sardine", "Lasagna", "Cupcake", "Smoothie",
-    "Noodle", "Muffin", "Kebab", "Gravy",
-    "Pickle", "Salami", "Sausage", "Schnitzel",
+  // Food (easy)
+  ...(["Pizza", "Burger", "Taco", "Cake", "Cookie", "Candy",
+    "Cheese", "Bread", "Rice", "Pasta", "Soup", "Salad",
+    "Apple", "Banana", "Grape", "Mango", "Lemon", "Cherry",
+    "Donut", "Waffle", "Pancake", "Toast", "Butter", "Honey",
+    "Sugar", "Pepper", "Ketchup", "Mustard", "Pickle", "Olive",
+    "Carrot", "Potato", "Tomato", "Onion", "Garlic", "Corn",
+    "Pretzel", "Muffin", "Brownie", "Pudding", "Fudge", "Bacon",
+    "Steak", "Shrimp", "Lobster", "Nugget", "Fries", "Gravy",
+    "Yogurt", "Cereal", "Oatmeal", "Bagel", "Cracker", "Chips",
   ] as const).map(w => ({ word: w, adult: false, category: "food" as WordCategory })),
 
-  // Actions & movements (clean)
-  ...(["Stumble", "Yawn", "Twirl", "Wiggle", "Shimmy",
-    "Gallop", "Crawl", "Headbang", "Curtsy", "Pirouette",
-    "Dabbing", "Breakdance", "Tiptoeing", "Sleepwalk", "Gargle",
-    "Sniffle", "Belch", "Whistle", "Hiccup", "Giggling",
-    "Winking", "Flexing", "Squatting",
+  // Actions (easy)
+  ...(["Jump", "Dance", "Sing", "Clap", "Wave", "Kick",
+    "Punch", "Spin", "Crawl", "Climb", "Swim", "Run",
+    "Walk", "Skip", "Hop", "Slide", "Throw", "Catch",
+    "Push", "Pull", "Shake", "Stretch", "Bend", "Twist",
+    "Wink", "Nod", "Bow", "Hug", "Kiss", "Slap",
+    "Poke", "Scratch", "Sneeze", "Cough", "Whistle", "Yell",
+    "Cry", "Whisper", "Stomp", "March", "Juggle", "Flex",
+    "Squat", "Lunge", "Dab", "Floss", "Surf", "Skate",
   ] as const).map(w => ({ word: w, adult: false, category: "actions" as WordCategory })),
+
+  // Objects (easy)
+  ...(["Phone", "Clock", "Mirror", "Pillow", "Blanket", "Candle",
+    "Hammer", "Ladder", "Bucket", "Basket", "Button", "Zipper",
+    "Pencil", "Crayon", "Eraser", "Ribbon", "Balloon", "Magnet",
+    "Guitar", "Drum", "Piano", "Trumpet", "Violin", "Flute",
+    "Camera", "Rocket", "Robot", "Helmet", "Shield", "Sword",
+    "Crown", "Trophy", "Medal", "Whistle", "Lantern", "Compass",
+    "Anchor", "Shovel", "Broom", "Mop", "Sponge", "Towel",
+    "Curtain", "Puzzle", "Dice", "Domino", "Marble", "Kite",
+  ] as const).map(w => ({ word: w, adult: false, category: "objects" as WordCategory })),
+
+  // Body (easy)
+  ...(["Elbow", "Ankle", "Thumb", "Dimple", "Freckle", "Eyebrow",
+    "Eyelash", "Nostril", "Chin", "Cheek", "Forehead", "Wrist",
+    "Shoulder", "Knuckle", "Toenail", "Armpit",
+  ] as const).map(w => ({ word: w, adult: false, category: "body" as WordCategory })),
+
+  // Sounds (easy)
+  ...(["Boom", "Bang", "Splash", "Crash", "Buzz", "Hiss",
+    "Roar", "Growl", "Howl", "Chirp", "Beep", "Ring",
+    "Snap", "Pop", "Crack", "Thud", "Sizzle", "Rumble",
+    "Squeak", "Rattle", "Clatter", "Jingle",
+  ] as const).map(w => ({ word: w, adult: false, category: "sounds" as WordCategory })),
+
+  // Characters (easy)
+  ...(["Clown", "Pirate", "Ninja", "Cowboy", "Wizard", "Knight",
+    "Queen", "King", "Prince", "Chef", "Doctor", "Pilot",
+    "Dancer", "Singer", "Painter", "Juggler", "Magician", "Mime",
+    "Zombie", "Ghost", "Vampire", "Mermaid", "Dragon", "Giant",
+  ] as const).map(w => ({ word: w, adult: false, category: "characters" as WordCategory })),
+
+  // Clothing (easy)
+  ...(["Boots", "Sandals", "Gloves", "Scarf", "Hoodie", "Beanie",
+    "Shorts", "Jacket", "Vest", "Apron", "Turban", "Tiara",
+    "Goggles", "Slippers", "Poncho", "Overalls",
+  ] as const).map(w => ({ word: w, adult: false, category: "clothing" as WordCategory })),
+
+  // Situations (easy)
+  ...(["Yawning", "Snoring", "Tripping", "Slipping", "Drooling",
+    "Farting", "Burping", "Blushing", "Waving", "Shivering",
+    "Sweating", "Sneezing", "Choking", "Stumbling", "Fumbling",
+  ] as const).map(w => ({ word: w, adult: false, category: "situations" as WordCategory })),
+
+  // Exclamations (easy)
+  ...(["Yikes", "Oops", "Wow", "Boom", "Bingo",
+    "Bravo", "Cheers", "Hooray", "Tada",
+  ] as const).map(w => ({ word: w, adult: false, category: "exclamations" as WordCategory })),
+
+  // Random (easy)
+  ...(["Dork", "Nerd", "Geek", "Goofball", "Bonkers", "Bananas",
+    "Weirdo", "Rascal", "Scooter", "Noodle", "Nugget", "Pumpkin",
+    "Mischief", "Ruckus", "Chaos", "Rascal", "Prankster",
+    "Trickster", "Joker", "Clumsy",
+  ] as const).map(w => ({ word: w, adult: false, category: "random" as WordCategory })),
+
+  // ===== NORMAL/HARDER WORDS (30%) =====
+
+  // Funny (normal)
+  ...(["Twerking", "Moonwalk", "Mullet", "Waddle", "Wedgie",
+    "Bamboozle", "Kerfuffle", "Slapstick", "Cringe", "Guffaw",
+    "Cackle", "Chortle", "Snicker",
+  ] as const).map(w => ({ word: w, adult: false, category: "funny" as WordCategory })),
+
+  // Animals (normal)
+  ...(["Platypus", "Porcupine", "Armadillo", "Chameleon", "Narwhal",
+    "Pangolin", "Manatee", "Tarantula", "Piranha", "Mongoose",
+    "Walrus", "Iguana", "Lemur", "Warthog", "Baboon",
+  ] as const).map(w => ({ word: w, adult: false, category: "animals" as WordCategory })),
+
+  // Food (normal)
+  ...(["Burrito", "Spaghetti", "Guacamole", "Fondue", "Croissant",
+    "Schnitzel", "Sardine", "Lasagna", "Dumpling", "Churro",
+    "Kebab", "Milkshake", "Smoothie", "Crouton", "Nacho",
+  ] as const).map(w => ({ word: w, adult: false, category: "food" as WordCategory })),
+
+  // Actions (normal)
+  ...(["Shimmy", "Gallop", "Pirouette", "Gargle", "Tiptoeing",
+    "Headbang", "Curtsy", "Somersault", "Cartwheel", "Limbo",
+    "Breakdance", "Leapfrog", "Sleepwalk",
+  ] as const).map(w => ({ word: w, adult: false, category: "actions" as WordCategory })),
+
+  // Objects (normal)
+  ...(["Plunger", "Boomerang", "Megaphone", "Snorkel", "Scarecrow",
+    "Treadmill", "Typewriter", "Telescope", "Mannequin", "Chainsaw",
+    "Hammock", "Pinata", "Skateboard", "Trampoline", "Thermometer",
+  ] as const).map(w => ({ word: w, adult: false, category: "objects" as WordCategory })),
+
+  // Characters (normal)
+  ...(["Gladiator", "Viking", "Caveman", "Astronaut", "Lumberjack",
+    "Ventriloquist", "Acrobat", "Werewolf", "Sasquatch",
+  ] as const).map(w => ({ word: w, adult: false, category: "characters" as WordCategory })),
+
+  // Situations (normal)
+  ...(["Photobomb", "Ghosting", "Catfishing", "Clickbait", "Facepalm",
+    "Eavesdropping", "Mansplaining", "Hangover", "Buzzkill",
+  ] as const).map(w => ({ word: w, adult: false, category: "situations" as WordCategory })),
+
+  // Random (normal)
+  ...(["Nincompoop", "Dingbat", "Blockhead", "Buffoonery", "Tomfoolery",
+    "Balderdash", "Poppycock", "Malarkey", "Schmooze", "Canoodle",
+    "Rigmarole", "Hodgepodge", "Shenanigans", "Hullabaloo", "Brouhaha",
+  ] as const).map(w => ({ word: w, adult: false, category: "random" as WordCategory })),
+
+  // ===== ADULT 18+ =====
 
   // Actions (adult)
   ...(["Flirting", "Grinding", "Spanking", "Stripping", "Moaning", "Thrusting",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
-  // Objects (clean)
-  ...(["Plunger", "Boomerang", "Flyswatter", "Boombox", "Skateboard",
-    "Hammock", "Pinata", "Megaphone", "Snorkel", "Scarecrow",
-    "Treadmill", "Typewriter", "Telescope", "Compass", "Mannequin",
-    "Lollipop", "Chainsaw", "Thermometer", "Whistle",
-  ] as const).map(w => ({ word: w, adult: false, category: "objects" as WordCategory })),
-
   // Objects (adult)
   ...(["Condom", "Vibrator", "Handcuffs", "Whip", "Dildo",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
-  // Body related (clean)
-  ...(["Dimples", "Freckles", "Goatee", "Nostril", "Kneecap",
-    "Earlobe", "Collarbone", "Elbow", "Armpit", "Bellybutton",
-    "Toenail", "Moustache",
-  ] as const).map(w => ({ word: w, adult: false, category: "body" as WordCategory })),
-
-  // Body related (adult)
+  // Body (adult)
   ...(["Nipple", "Booty", "Cleavage", "Crotch",
     "Boner", "Bulge", "Hickey",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Adult & cheeky 🔥
   ...(["Orgasm", "Foreplay", "Kinky", "Naughty", "Quickie",
-    "Bondage", "Dominatrix", "Cougar", "MILF", "Stripper",
-    "Escort", "Playboy", "Hooters", "Boobies", "Horny",
+    "Bondage", "Dominatrix", "Cougar", "Stripper",
+    "Playboy", "Hooters", "Boobies", "Horny",
     "Seductive", "Aroused", "Threesome", "Fetish", "Tease",
     "Spank", "Lingerie", "Thong", "Corset", "Stilettos",
     "Striptease", "Lapdance", "Commando", "Peeping",
     "Flashing", "Groping", "Snogging",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
-  // Funny situations (clean)
-  ...(["Photobomb", "Ghosting", "Catfishing", "Clickbait", "Facepalm",
-    "Deadpan", "Buzzkill", "FOMO", "Hangover",
-    "Mansplaining", "Manspreading", "Eavesdropping",
-    "Sleeptalking", "Drooling", "Farting",
-  ] as const).map(w => ({ word: w, adult: false, category: "situations" as WordCategory })),
-
-  // Funny situations (adult)
+  // Situations (adult)
   ...(["Streaking", "Queefing",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
-
-  // Sounds
-  ...(["Rumble", "Sizzle", "Splat", "Thud", "Whoosh",
-    "Zing", "Clang", "Bonk", "Boing", "Crunch",
-  ] as const).map(w => ({ word: w, adult: false, category: "sounds" as WordCategory })),
-
-  // Characters & types (clean)
-  ...(["Mime", "Juggler", "Magician", "Clown", "Acrobat",
-    "Cowboy", "Gladiator", "Viking", "Caveman", "Astronaut",
-    "Lumberjack", "Ventriloquist",
-  ] as const).map(w => ({ word: w, adult: false, category: "characters" as WordCategory })),
 
   // Characters (adult)
   ...(["Gigolo", "Playmate", "Hunk",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
-  // Clothing (clean)
-  ...(["Onesie", "Crocs", "Sombrero", "Monocle", "Cape",
-    "Speedo", "Beanie", "Overalls", "Beret",
-  ] as const).map(w => ({ word: w, adult: false, category: "clothing" as WordCategory })),
-
   // Clothing (adult)
-  ...(["Mankini", "G-string", "Bikini", "Boxers", "Fishnet",
+  ...(["Mankini", "Bikini", "Boxers", "Fishnet", "Speedo",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
-
-  // Exclamations & slang (clean)
-  ...(["Bazinga", "Geronimo", "Eureka", "Abracadabra", "Shazam",
-    "Cowabunga", "Yikes", "Oopsie", "Knackered", "Cheeky",
-    "Dodgy",
-  ] as const).map(w => ({ word: w, adult: false, category: "exclamations" as WordCategory })),
 
   // Exclamations (adult)
   ...(["Dammit", "Bollocks", "Bloody", "Wanker", "Tosser",
     "Snog", "Shag", "Randy",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
-  // Random hilarious (clean)
-  ...(["Nincompoop", "Dingbat", "Knucklehead", "Numbskull", "Birdbrain",
-    "Scatterbrain", "Blockhead", "Meathead", "Lollygag",
-    "Hocus-pocus", "Roly-poly",
-    "Tiddlywinks", "Cockamamie", "Balderdash", "Poppycock", "Malarkey",
-    "Flimflam", "Hoopla", "Ruckus", "Tomfoolery", "Buffoonery",
-    "Canoodle", "Schmooze", "Snazzy", "Swanky", "Saucy",
-    "Smooching", "Noogie", "Nuggets",
-    "Dumbbell", "Wobbliest", "Squishiest", "Wobbly",
-  ] as const).map(w => ({ word: w, adult: false, category: "random" as WordCategory })),
-
   // Random (adult)
   ...(["Dingleberry", "Bootylicious", "Gooch", "Tiddies",
     "Dongle", "Knob", "Jugs", "Melons", "Rump",
-    "Pecker", "Weenie", "Schlong", "Dangly", "Wiener",
-    "Burp",
+    "Pecker", "Weenie", "Schlong", "Wiener",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 ];
 
@@ -162,12 +217,10 @@ export function getRandomWord(allowAdult: boolean = true, categories: WordCatego
   const eligible = WORD_BANK
     .map((entry, index) => ({ ...entry, index }))
     .filter(e => {
-      // Filter by adult flag
       if (e.adult && !allowAdult && !includesAdult) return false;
       if (e.adult && !includesAdult && !isAll) return false;
       if (e.adult && isAll && !allowAdult) return false;
       
-      // Filter by category
       if (!isAll) {
         if (e.adult) return includesAdult;
         return categories.includes(e.category);
