@@ -163,15 +163,23 @@ const WORD_BANK: WordEntry[] = [
 
   // Actions (adult)
   ...(["Flirting", "Grinding", "Spanking", "Stripping", "Moaning", "Thrusting",
+    "Seducing", "Fondling", "Caressing", "Teasing", "Licking", "Biting",
+    "Sucking", "Nibbling", "Mounting", "Humping", "Undressing", "Massaging",
+    "Smooching", "Necking", "Petting", "Ravishing", "Dominating",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Objects (adult)
   ...(["Condom", "Vibrator", "Handcuffs", "Whip", "Dildo",
+    "Lubricant", "Blindfold", "Paddle", "Garter", "Collar",
+    "Leash", "Feather", "Candle", "Rope", "Cage",
+    "Harness", "Restraints", "Beads", "Plug",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Body (adult)
   ...(["Nipple", "Booty", "Cleavage", "Crotch",
-    "Boner", "Bulge", "Hickey",
+    "Boner", "Bulge", "Hickey", "Abs", "Tushy",
+    "Midriff", "Thigh", "Navel", "Curves", "Backside",
+    "Derriere", "Torso", "Pelvis", "Buttocks", "Groin",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Adult & cheeky 🔥
@@ -182,29 +190,45 @@ const WORD_BANK: WordEntry[] = [
     "Spank", "Lingerie", "Thong", "Corset", "Stilettos",
     "Striptease", "Lapdance", "Commando", "Peeping",
     "Flashing", "Groping", "Snogging",
+    "Risque", "Frisky", "Steamy", "Sultry", "Sensual",
+    "Erotic", "Provocative", "Scandalous", "Taboo", "Sinful",
+    "Temptation", "Desire", "Passion", "Lust", "Fantasy",
+    "Intimate", "Ravish", "Climax", "Ecstasy", "Pleasure",
+    "Affair", "Rendezvous", "Mistress", "Swinger", "Voyeur",
+    "Exhibitionist", "Sadomasochist", "Submission", "Kink", "Roleplay",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Situations (adult)
-  ...(["Streaking", "Queefing",
+  ...(["Streaking", "Queefing", "Skinny­dipping", "Catcalling",
+    "Flashing", "Mooning", "Sexting", "Hookup",
+    "Booty­call", "Walk­of­shame", "Netflix­chill",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Characters (adult)
-  ...(["Gigolo", "Playmate", "Hunk",
+  ...(["Gigolo", "Playmate", "Hunk", "Vixen", "Temptress",
+    "Seductress", "Casanova", "Heartthrob", "Bombshell",
+    "Hottie", "Stud", "Minx", "Siren", "Babe",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Clothing (adult)
   ...(["Mankini", "Bikini", "Boxers", "Fishnet", "Speedo",
+    "Negligee", "Bustier", "Teddy", "Bodystocking", "Garter",
+    "Suspenders", "Camisole", "Babydoll", "Lace", "Leather",
+    "Latex", "Mesh", "Sheer", "Satin", "Silk",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Exclamations (adult)
   ...(["Dammit", "Bollocks", "Bloody", "Wanker", "Tosser",
-    "Snog", "Shag", "Randy",
+    "Snog", "Shag", "Randy", "Cheeky", "Saucy",
+    "Frisky", "Filthy", "Dirty", "Raunchy", "Naughty",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 
   // Random (adult)
   ...(["Dingleberry", "Bootylicious", "Gooch", "Tiddies",
     "Dongle", "Knob", "Jugs", "Melons", "Rump",
     "Pecker", "Weenie", "Schlong", "Wiener",
+    "Jiggle", "Wobble", "Bouncy", "Busty", "Chesty",
+    "Thicc", "Smutty", "Buxom", "Voluptuous", "Curvaceous",
   ] as const).map(w => ({ word: w, adult: true, category: "adult" as WordCategory })),
 ];
 
