@@ -10,7 +10,7 @@ export interface Team {
   roundsPlayed: number;
 }
 
-export type WordCategory = "all" | "funny" | "animals" | "food" | "actions" | "objects" | "body" | "characters" | "clothing" | "sounds" | "situations" | "exclamations" | "random" | "adult";
+export type WordCategory = "all" | "funny" | "animals" | "food" | "actions" | "objects" | "body" | "characters" | "clothing" | "sounds" | "situations" | "exclamations" | "random" | "corporate" | "hollywood" | "bollywood";
 
 export const CATEGORY_LABELS: Record<WordCategory, string> = {
   all: "All Categories",
@@ -26,7 +26,9 @@ export const CATEGORY_LABELS: Record<WordCategory, string> = {
   situations: "Situations",
   exclamations: "Exclamations",
   random: "Random Hilarious",
-  adult: "🔥 Adult 18+",
+  corporate: "💼 Corporate",
+  hollywood: "🎬 Hollywood",
+  bollywood: "🎭 Bollywood",
 };
 
 export interface GameState {

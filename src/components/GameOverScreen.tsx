@@ -1,5 +1,5 @@
 import { GameState } from "@/lib/gameTypes";
-import { Crown, RotateCcw, Trophy, Medal } from "lucide-react";
+import { Crown, RotateCcw, Trophy, Scale } from "lucide-react";
 
 interface GameOverScreenProps {
   game: GameState;
@@ -18,12 +18,18 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
   return (
     <div className="min-h-screen flex flex-col items-center justify-center px-4">
       <div className="text-center animate-slide-up-fade max-w-md w-full">
-        {/* Crown */}
+        {/* Icon */}
         <div className="relative mb-6">
-          <Crown className="w-16 h-16 mx-auto text-accent" />
-          <div className="absolute inset-0 flex items-center justify-center">
-            <div className="w-16 h-16 rounded-full bg-accent/20 animate-pulse-ring" />
-          </div>
+          {isTie ? (
+            <Scale className="w-16 h-16 mx-auto text-muted-foreground" />
+          ) : (
+            <>
+              <Crown className="w-16 h-16 mx-auto text-accent" />
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-16 h-16 rounded-full bg-accent/20 animate-pulse-ring" />
+              </div>
+            </>
+          )}
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-bold mb-2 text-glow-accent">
@@ -38,7 +44,6 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
           {sortedTeams.map(({ team, originalIndex }, rank) => {
             const isWinner = !isTie && rank === 0;
             const isA = originalIndex === 0;
-            // Sort players by score descending, take top 3
             const rankedPlayers = [...team.players].sort((a, b) => b.score - a.score);
             const topPlayers = rankedPlayers.slice(0, 3);
             const medalIcons = ["🥇", "🥈", "🥉"];
