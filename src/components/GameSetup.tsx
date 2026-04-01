@@ -1,12 +1,15 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff, Flame } from "lucide-react";
+import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
 
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
 }
+
+const NON_ADULT_CATEGORIES = (Object.keys(CATEGORY_LABELS) as WordCategory[]).filter(c => c !== "all");
 
 export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [teamAName, setTeamAName] = useState("Team Alpha");
@@ -17,6 +20,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [wordsPerTurn, setWordsPerTurn] = useState<5 | 6>(5);
   const [totalRounds, setTotalRounds] = useState(4);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
+  const [adultMode, setAdultMode] = useState(false);
 
   const addPlayer = (team: "a" | "b") => {
     if (team === "a") setTeamAPlayers([...teamAPlayers, ""]);
@@ -47,23 +51,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const toggleCategory = (cat: WordCategory) => {
     setSelectedCategories((prev) => {
       if (cat === "all") {
-        // Toggle "all" but keep "adult" if it was selected
-        const hadAdult = prev.includes("adult");
-        if (prev.includes("all")) {
-          // Deselecting "all" — keep adult if present, else fallback
-          return hadAdult ? ["adult"] : ["all"];
-        }
-        return hadAdult ? ["all", "adult"] : ["all"];
+        return ["all"];
       }
-      if (cat === "adult") {
-        // Adult can be toggled independently alongside "all" or custom
-        if (prev.includes("adult")) {
-          const result = prev.filter((c) => c !== "adult");
-          return result.length === 0 ? ["all"] : result;
-        }
-        return [...prev, "adult"];
-      }
-      // Regular category — remove "all" but keep "adult"
       const without = prev.filter((c) => c !== "all");
       if (without.includes(cat)) {
         const result = without.filter((c) => c !== cat);
@@ -72,8 +61,6 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       return [...without, cat];
     });
   };
-
-  const adultMode = selectedCategories.includes("adult") || selectedCategories.includes("all");
 
   const handleStart = () => {
     const state: GameState = {
@@ -325,24 +312,32 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
         </div>
 
         {/* Word Categories */}
-        <div className="bg-card rounded-lg p-5 card-glow border border-border mb-8">
+        <div className="bg-card rounded-lg p-5 card-glow border border-border mb-4">
           <div className="flex items-center gap-2 mb-3">
             <Tags className="w-4 h-4 text-primary" />
             <span className="text-sm font-medium">Word Categories</span>
           </div>
           <div className="flex flex-wrap gap-2">
-            {(Object.keys(CATEGORY_LABELS) as WordCategory[]).map((cat) => {
+            <button
+              onClick={() => toggleCategory("all")}
+              className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95 flex items-center gap-1 ${
+                selectedCategories.includes("all")
+                  ? "bg-primary text-primary-foreground shadow-sm"
+                  : "bg-muted text-muted-foreground hover:text-foreground"
+              }`}
+            >
+              {selectedCategories.includes("all") && <Check className="w-3 h-3" />}
+              {CATEGORY_LABELS.all}
+            </button>
+            {NON_ADULT_CATEGORIES.map((cat) => {
               const isSelected = selectedCategories.includes(cat);
-              const isAdult = cat === "adult";
               return (
                 <button
                   key={cat}
                   onClick={() => toggleCategory(cat)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95 flex items-center gap-1 ${
                     isSelected
-                      ? isAdult
-                        ? "bg-destructive text-destructive-foreground shadow-sm"
-                        : "bg-primary text-primary-foreground shadow-sm"
+                      ? "bg-primary text-primary-foreground shadow-sm"
                       : "bg-muted text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -351,6 +346,26 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 </button>
               );
             })}
+          </div>
+        </div>
+
+        {/* Adult 18+ Toggle */}
+        <div className="bg-card rounded-lg p-4 border border-destructive/20 mb-8">
+          <div className="flex items-center justify-between">
+            <div className="flex items-center gap-3">
+              <div className={`p-2 rounded-lg ${adultMode ? "bg-destructive/15" : "bg-muted"}`}>
+                <Flame className={`w-5 h-5 ${adultMode ? "text-destructive" : "text-muted-foreground"}`} />
+              </div>
+              <div>
+                <p className="font-display font-semibold text-sm">Adult 18+ Mode</p>
+                <p className="text-xs text-muted-foreground">Include spicy & adult words in the game</p>
+              </div>
+            </div>
+            <Switch
+              checked={adultMode}
+              onCheckedChange={setAdultMode}
+              className="data-[state=checked]:bg-destructive"
+            />
           </div>
         </div>
 
