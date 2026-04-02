@@ -393,6 +393,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
 
         {/* Version */}
         <p className="text-center text-xs text-muted-foreground/50 mt-6">v2.2</p>
+        <FeedbackButton />
       </div>
     </div>
   );
