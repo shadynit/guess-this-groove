@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff, Flame } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff, Flame, Pencil } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
