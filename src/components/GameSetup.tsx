@@ -4,6 +4,7 @@ import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff, Flame
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
+import FeedbackButton from "@/components/FeedbackDialog";
 
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
@@ -392,6 +393,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
 
         {/* Version */}
         <p className="text-center text-xs text-muted-foreground/50 mt-6">v2.2</p>
+        <FeedbackButton />
       </div>
     </div>
   );
