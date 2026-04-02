@@ -154,8 +154,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <input
                 value={teamAName}
                 onChange={(e) => setTeamAName(e.target.value)}
-                className="bg-transparent border-b border-dashed border-team-a/40 text-team-a font-display text-xl font-semibold outline-none w-full placeholder:text-team-a/40 focus:border-team-a transition-colors cursor-text"
-                placeholder="Team name ✏️"
+                className="bg-transparent border-b-2 border-dashed border-team-a/40 text-team-a font-display text-xl font-semibold outline-none w-full placeholder:text-team-a/40 focus:border-team-a hover:border-team-a/70 transition-colors cursor-text"
+                placeholder="Tap to edit team name ✏️"
               />
             </div>
             <div className="space-y-2">
@@ -164,8 +164,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   <input
                     value={p}
                     onChange={(e) => updatePlayer("a", i, e.target.value)}
-                    placeholder={`Player ${i + 1}`}
-                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground"
+                    placeholder="Type player name"
+                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
                   />
                   {teamAPlayers.length > 1 && (
                     <button
@@ -193,8 +193,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <input
                 value={teamBName}
                 onChange={(e) => setTeamBName(e.target.value)}
-                className="bg-transparent border-b border-dashed border-team-b/40 text-team-b font-display text-xl font-semibold outline-none w-full placeholder:text-team-b/40 focus:border-team-b transition-colors cursor-text"
-                placeholder="Team name ✏️"
+                className="bg-transparent border-b-2 border-dashed border-team-b/40 text-team-b font-display text-xl font-semibold outline-none w-full placeholder:text-team-b/40 focus:border-team-b hover:border-team-b/70 transition-colors cursor-text"
+                placeholder="Tap to edit team name ✏️"
               />
             </div>
             <div className="space-y-2">
@@ -203,8 +203,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   <input
                     value={p}
                     onChange={(e) => updatePlayer("b", i, e.target.value)}
-                    placeholder={`Player ${i + 1}`}
-                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-b/50 placeholder:text-muted-foreground"
+                    placeholder="Type player name"
+                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-b/50 placeholder:text-muted-foreground/60 placeholder:italic"
                   />
                   {teamBPlayers.length > 1 && (
                     <button
