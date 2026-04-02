@@ -164,8 +164,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   <input
                     value={p}
                     onChange={(e) => updatePlayer("a", i, e.target.value)}
-                    placeholder={`Player ${i + 1}`}
-                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground"
+                    placeholder="Type player name"
+                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
                   />
                   {teamAPlayers.length > 1 && (
                     <button
