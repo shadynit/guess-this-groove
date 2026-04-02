@@ -13,22 +13,22 @@ export interface Team {
 export type WordCategory = "all" | "funny" | "animals" | "food" | "actions" | "objects" | "body" | "characters" | "clothing" | "sounds" | "situations" | "exclamations" | "random" | "corporate" | "hollywood" | "bollywood";
 
 export const CATEGORY_LABELS: Record<WordCategory, string> = {
-  all: "All Categories",
-  funny: "Funny & Silly",
-  animals: "Animals",
-  food: "Food & Drinks",
-  actions: "Actions",
-  objects: "Objects",
-  body: "Body Related",
-  characters: "Characters",
-  clothing: "Clothing",
-  sounds: "Sounds",
-  situations: "Situations",
-  exclamations: "Exclamations",
-  random: "Random Hilarious",
+  all: "🌟 All Categories",
+  funny: "😂 Funny & Silly",
+  animals: "🐾 Animals",
+  food: "🍕 Food & Drinks",
+  actions: "🏃 Actions",
+  objects: "📦 Objects",
+  body: "💪 Body Related",
+  characters: "🦸 Characters",
+  clothing: "👗 Clothing",
+  sounds: "🔊 Sounds",
+  situations: "🎭 Situations",
+  exclamations: "📢 Exclamations",
+  random: "🎲 Random Hilarious",
   corporate: "💼 Corporate",
   hollywood: "🎬 Hollywood",
-  bollywood: "🎭 Bollywood",
+  bollywood: "🎥 Bollywood",
 };
 
 export interface GameState {

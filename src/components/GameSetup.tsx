@@ -193,12 +193,15 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           <div className="bg-card rounded-lg p-5 card-glow-team-b border border-team-b/20">
             <div className="flex items-center gap-2 mb-4">
               <Users className="w-5 h-5 text-team-b" />
-              <input
-                value={teamBName}
-                onChange={(e) => setTeamBName(e.target.value)}
-                className="bg-transparent border-b-2 border-dashed border-team-b/40 text-team-b font-display text-xl font-semibold outline-none w-full placeholder:text-team-b/40 focus:border-team-b hover:border-team-b/70 transition-colors cursor-text"
-                placeholder="Tap to edit team name ✏️"
-              />
+              <div className="relative flex-1">
+                <input
+                  value={teamBName}
+                  onChange={(e) => setTeamBName(e.target.value)}
+                  className="bg-transparent border-b-2 border-dashed border-team-b/40 text-team-b font-display text-xl font-semibold outline-none w-full pr-7 placeholder:text-team-b/40 focus:border-team-b hover:border-team-b/70 transition-colors cursor-text"
+                  placeholder="Tap to edit team name"
+                />
+                <Pencil className="w-4 h-4 text-team-b/50 absolute right-1 top-1/2 -translate-y-1/2 pointer-events-none" />
+              </div>
             </div>
             <div className="space-y-2">
               {teamBPlayers.map((p, i) => (
