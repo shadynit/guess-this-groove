@@ -154,8 +154,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <input
                 value={teamAName}
                 onChange={(e) => setTeamAName(e.target.value)}
-                className="bg-transparent border-b border-dashed border-team-a/40 text-team-a font-display text-xl font-semibold outline-none w-full placeholder:text-team-a/40 focus:border-team-a transition-colors cursor-text"
-                placeholder="Team name ✏️"
+                className="bg-transparent border-b-2 border-dashed border-team-a/40 text-team-a font-display text-xl font-semibold outline-none w-full placeholder:text-team-a/40 focus:border-team-a hover:border-team-a/70 transition-colors cursor-text"
+                placeholder="Tap to edit team name ✏️"
               />
             </div>
             <div className="space-y-2">
