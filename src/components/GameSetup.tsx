@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
@@ -16,6 +16,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
 }
@@ -166,37 +173,92 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           </div>
         </div>
 
-        {/* Game Instructions */}
-        <div className="bg-card rounded-lg p-5 border border-border mb-6">
-          <div className="flex items-center gap-2 mb-3">
-            <BookOpen className="w-5 h-5 text-primary" />
-            <span className="text-lg font-display font-semibold">How to Play</span>
-          </div>
-          <p className="text-sm text-muted-foreground leading-relaxed">
-            The objective of the game is to describe as many words as possible within 30 seconds (or a set time limit) while your teammates try to guess them. You cannot use any part of the word itself or translate it into another language as a clue. Each correctly guessed word earns your team one point.
-          </p>
-        </div>
+        {/* Game Rules & Features Buttons */}
+        <div className="flex gap-3 mb-8">
+          {/* Game Rules Dialog */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-all active:scale-[0.97] text-sm font-semibold">
+                <ScrollText className="w-5 h-5 text-primary" />
+                Game Rules
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md max-h-[80vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-xl">
+                  <ScrollText className="w-5 h-5 text-primary" />
+                  Game Rules
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4 text-sm text-muted-foreground leading-relaxed">
+                <div className="flex gap-2">
+                  <span className="text-lg shrink-0">🎯</span>
+                  <p><strong className="text-foreground">The Goal:</strong> Get your team to guess as many words as possible before time runs out. Each correct guess = 1 point.</p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-lg shrink-0">👀</span>
+                  <p><strong className="text-foreground">One Player Sees the Screen:</strong> Only the active player (describer) looks at the phone. Teammates must NOT see the words.</p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-lg shrink-0">🗣️</span>
+                  <p><strong className="text-foreground">Describe It!</strong> Use clues, gestures, sounds — anything to get your team to shout the correct word aloud.</p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-lg shrink-0">✅</span>
+                  <p><strong className="text-foreground">Tap to Score:</strong> When your teammate guesses correctly, tap that word — it turns green and scores a point for your team.</p>
+                </div>
+                <div className="flex gap-2">
+                  <span className="text-lg shrink-0">⏱️</span>
+                  <p><strong className="text-foreground">Beat the Clock:</strong> The timer counts down. When it hits zero, a buzzer sounds and the round ends automatically.</p>
+                </div>
+                <div className="mt-2 p-3 rounded-lg bg-destructive/10 border border-destructive/20">
+                  <div className="flex items-center gap-2 mb-2">
+                    <ShieldAlert className="w-4 h-4 text-destructive" />
+                    <strong className="text-foreground text-sm">You are NOT allowed to:</strong>
+                  </div>
+                  <ul className="space-y-1 ml-1">
+                    <li>❌ Say the word</li>
+                    <li>❌ Use synonyms</li>
+                    <li>❌ Use antonyms</li>
+                    <li>❌ Use parts of the word</li>
+                    <li>❌ Translate to another language</li>
+                  </ul>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
 
-        {/* Features */}
-        <div className="bg-card rounded-lg p-5 border border-border mb-8">
-          <div className="flex items-center gap-2 mb-3">
-            <Zap className="w-5 h-5 text-accent" />
-            <span className="text-lg font-display font-semibold">Features</span>
-          </div>
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 text-sm text-muted-foreground">
-            <div className="flex items-start gap-2">
-              <WifiOff className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span><strong className="text-foreground">Works Offline</strong> — After first load, play anywhere without internet</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <Users className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span><strong className="text-foreground">Multiplayer</strong> — Unlimited players across two teams</span>
-            </div>
-            <div className="flex items-start gap-2">
-              <Tags className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span><strong className="text-foreground">Word Categories</strong> — Choose topics or mix them all</span>
-            </div>
-          </div>
+          {/* Features Dialog */}
+          <Dialog>
+            <DialogTrigger asChild>
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-card border border-border hover:border-accent/40 transition-all active:scale-[0.97] text-sm font-semibold">
+                <Zap className="w-5 h-5 text-accent" />
+                Features
+              </button>
+            </DialogTrigger>
+            <DialogContent className="max-w-md">
+              <DialogHeader>
+                <DialogTitle className="flex items-center gap-2 text-xl">
+                  <Zap className="w-5 h-5 text-accent" />
+                  Features
+                </DialogTitle>
+              </DialogHeader>
+              <div className="space-y-4 text-sm text-muted-foreground">
+                <div className="flex items-start gap-3">
+                  <WifiOff className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Works Offline</strong> — After first load, play anywhere without internet</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Users className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Multiplayer</strong> — Unlimited players across two teams</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Tags className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Word Categories</strong> — Choose topics or mix them all</p>
+                </div>
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
 
         {/* Teams */}
