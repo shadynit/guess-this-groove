@@ -108,7 +108,13 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-2xl animate-slide-up-fade">
         {/* Theme toggle */}
-        <div className="flex justify-end mb-2">
+        <div className="flex items-center justify-between mb-2">
+          <button
+            onClick={resetToDefaults}
+            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors active:scale-95"
+          >
+            <RotateCcw className="w-3 h-3" /> Reset defaults
+          </button>
           <ThemeToggle />
         </div>
         {/* Title */}
