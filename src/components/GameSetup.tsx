@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
@@ -16,6 +16,13 @@ import {
   AlertDialogTitle,
   AlertDialogTrigger,
 } from "@/components/ui/alert-dialog";
+import {
+  Dialog,
+  DialogContent,
+  DialogHeader,
+  DialogTitle,
+  DialogTrigger,
+} from "@/components/ui/dialog";
 interface GameSetupProps {
   onStartGame: (state: GameState) => void;
 }
