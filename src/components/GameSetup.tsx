@@ -132,10 +132,6 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <span><strong className="text-foreground">Works Offline</strong> — After first load, play anywhere without internet</span>
             </div>
             <div className="flex items-start gap-2">
-              <Wifi className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span><strong className="text-foreground">Installable</strong> — Add to home screen for an app-like experience</span>
-            </div>
-            <div className="flex items-start gap-2">
               <Users className="w-4 h-4 text-primary mt-0.5 shrink-0" />
               <span><strong className="text-foreground">Multiplayer</strong> — Unlimited players across two teams</span>
             </div>
