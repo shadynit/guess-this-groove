@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, Wifi, WifiOff, Flame, Pencil } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
@@ -22,6 +22,18 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [totalRounds, setTotalRounds] = useState(4);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
   const [adultMode, setAdultMode] = useState(false);
+
+  const resetToDefaults = () => {
+    setTeamAName("Team Alpha");
+    setTeamBName("Team Beta");
+    setTeamAPlayers(["Player 1", "Player 2"]);
+    setTeamBPlayers(["Player 1", "Player 2"]);
+    setRoundTime(30);
+    setWordsPerTurn(5);
+    setTotalRounds(4);
+    setSelectedCategories(["all"]);
+    setAdultMode(false);
+  };
 
   const addPlayer = (team: "a" | "b") => {
     if (team === "a") setTeamAPlayers([...teamAPlayers, ""]);
@@ -96,7 +108,13 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
     <div className="min-h-screen flex flex-col items-center justify-center px-4 py-8">
       <div className="w-full max-w-2xl animate-slide-up-fade">
         {/* Theme toggle */}
-        <div className="flex justify-end mb-2">
+        <div className="flex items-center justify-between mb-2">
+          <button
+            onClick={resetToDefaults}
+            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors active:scale-95"
+          >
+            <RotateCcw className="w-3 h-3" /> Reset defaults
+          </button>
           <ThemeToggle />
         </div>
         {/* Title */}
