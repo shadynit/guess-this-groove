@@ -119,22 +119,51 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       <div className="w-full max-w-2xl animate-slide-up-fade">
         {/* Theme toggle */}
         <div className="flex items-center justify-between mb-2">
-          <button
-            onClick={resetToDefaults}
-            className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors active:scale-95"
-          >
-            <RotateCcw className="w-3 h-3" /> Reset defaults
-          </button>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors active:scale-95">
+                <RotateCcw className="w-3 h-3" /> Reset defaults
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Reset to Defaults?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This will reset all settings, team names, and players back to their default values.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={resetToDefaults}>Yes, Reset</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
           <ThemeToggle />
         </div>
         {/* Title */}
         <div className="text-center mb-10">
-          <h1 className="text-5xl sm:text-6xl font-bold text-glow tracking-tight leading-none mb-3">
-            Word Rush
-          </h1>
-          <p className="text-muted-foreground text-lg">
-            Describe the word. Don't say it. Beat the clock.
-          </p>
+          <div className="flex items-center justify-center gap-3 mb-3">
+            <MessageCircle className="w-8 h-8 sm:w-10 sm:h-10 text-team-a animate-bounce" style={{ animationDelay: '0s', animationDuration: '2s' }} />
+            <h1 className="text-5xl sm:text-6xl font-bold tracking-tight leading-none">
+              <span className="text-primary">W</span>
+              <span className="text-team-a">o</span>
+              <span className="text-accent">r</span>
+              <span className="text-secondary">d</span>
+              <span className="mx-2" />
+              <span className="text-team-b">R</span>
+              <span className="text-primary">u</span>
+              <span className="text-team-a">s</span>
+              <span className="text-accent">h</span>
+            </h1>
+            <PartyPopper className="w-8 h-8 sm:w-10 sm:h-10 text-team-b animate-bounce" style={{ animationDelay: '0.3s', animationDuration: '2s' }} />
+          </div>
+          <div className="flex items-center justify-center gap-1.5 mb-1">
+            <Sparkles className="w-4 h-4 text-accent animate-pulse" />
+            <p className="text-muted-foreground text-lg">
+              Describe the word. Don't say it. Beat the clock.
+            </p>
+            <Sparkles className="w-4 h-4 text-accent animate-pulse" style={{ animationDelay: '0.5s' }} />
+          </div>
         </div>
 
         {/* Game Instructions */}
