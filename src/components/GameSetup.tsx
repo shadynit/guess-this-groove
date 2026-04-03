@@ -161,12 +161,15 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
             <div className="space-y-2">
               {teamAPlayers.map((p, i) => (
                 <div key={i} className="flex gap-2">
-                  <input
-                    value={p}
-                    onChange={(e) => updatePlayer("a", i, e.target.value)}
-                    placeholder="Type player name"
-                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
-                  />
+                  <div className="relative flex-1">
+                    <input
+                      value={p}
+                      onChange={(e) => updatePlayer("a", i, e.target.value)}
+                      placeholder="Type player name"
+                      className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
+                    />
+                    <Pencil className="w-3 h-3 text-muted-foreground/50 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
                   {teamAPlayers.length > 1 && (
                     <button
                       onClick={() => removePlayer("a", i)}
