@@ -15,8 +15,8 @@ const NON_ADULT_CATEGORIES = (Object.keys(CATEGORY_LABELS) as WordCategory[]).fi
 export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [teamAName, setTeamAName] = useState("Team Alpha");
   const [teamBName, setTeamBName] = useState("Team Beta");
-  const [teamAPlayers, setTeamAPlayers] = useState<string[]>([""]);
-  const [teamBPlayers, setTeamBPlayers] = useState<string[]>([""]);
+  const [teamAPlayers, setTeamAPlayers] = useState<string[]>(["Player 1", "Player 2"]);
+  const [teamBPlayers, setTeamBPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
   const [wordsPerTurn, setWordsPerTurn] = useState<5 | 6>(5);
   const [totalRounds, setTotalRounds] = useState(4);
@@ -132,10 +132,6 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <span><strong className="text-foreground">Works Offline</strong> — After first load, play anywhere without internet</span>
             </div>
             <div className="flex items-start gap-2">
-              <Wifi className="w-4 h-4 text-primary mt-0.5 shrink-0" />
-              <span><strong className="text-foreground">Installable</strong> — Add to home screen for an app-like experience</span>
-            </div>
-            <div className="flex items-start gap-2">
               <Users className="w-4 h-4 text-primary mt-0.5 shrink-0" />
               <span><strong className="text-foreground">Multiplayer</strong> — Unlimited players across two teams</span>
             </div>
@@ -165,12 +161,15 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
             <div className="space-y-2">
               {teamAPlayers.map((p, i) => (
                 <div key={i} className="flex gap-2">
-                  <input
-                    value={p}
-                    onChange={(e) => updatePlayer("a", i, e.target.value)}
-                    placeholder="Type player name"
-                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
-                  />
+                  <div className="relative flex-1">
+                    <input
+                      value={p}
+                      onChange={(e) => updatePlayer("a", i, e.target.value)}
+                      placeholder="Type player name"
+                      className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
+                    />
+                    <Pencil className="w-3 h-3 text-muted-foreground/50 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
                   {teamAPlayers.length > 1 && (
                     <button
                       onClick={() => removePlayer("a", i)}
@@ -207,12 +206,15 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
             <div className="space-y-2">
               {teamBPlayers.map((p, i) => (
                 <div key={i} className="flex gap-2">
-                  <input
-                    value={p}
-                    onChange={(e) => updatePlayer("b", i, e.target.value)}
-                    placeholder="Type player name"
-                    className="flex-1 bg-muted rounded-md px-3 py-2 text-sm outline-none focus:ring-2 focus:ring-team-b/50 placeholder:text-muted-foreground/60 placeholder:italic"
-                  />
+                  <div className="relative flex-1">
+                    <input
+                      value={p}
+                      onChange={(e) => updatePlayer("b", i, e.target.value)}
+                      placeholder="Type player name"
+                      className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-b/50 placeholder:text-muted-foreground/60 placeholder:italic"
+                    />
+                    <Pencil className="w-3 h-3 text-muted-foreground/50 absolute right-2.5 top-1/2 -translate-y-1/2 pointer-events-none" />
+                  </div>
                   {teamBPlayers.length > 1 && (
                     <button
                       onClick={() => removePlayer("b", i)}
