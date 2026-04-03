@@ -23,6 +23,18 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
   const [adultMode, setAdultMode] = useState(false);
 
+  const resetToDefaults = () => {
+    setTeamAName("Team Alpha");
+    setTeamBName("Team Beta");
+    setTeamAPlayers(["Player 1", "Player 2"]);
+    setTeamBPlayers(["Player 1", "Player 2"]);
+    setRoundTime(30);
+    setWordsPerTurn(5);
+    setTotalRounds(4);
+    setSelectedCategories(["all"]);
+    setAdultMode(false);
+  };
+
   const addPlayer = (team: "a" | "b") => {
     if (team === "a") setTeamAPlayers([...teamAPlayers, ""]);
     else setTeamBPlayers([...teamBPlayers, ""]);
