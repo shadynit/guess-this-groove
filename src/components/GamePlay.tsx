@@ -154,10 +154,10 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
                 strokeWidth="8" strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={circumference * (1 - progress)}
-                className="transition-all duration-1000 linear"
+                className={`transition-all duration-1000 linear ${isBlinking ? "animate-timer-blink" : ""}`}
               />
             </svg>
-            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold transition-colors duration-300 ${isBlinking ? "animate-timer-blink" : ""} ${isUrgent ? "text-destructive" : ""}`}>
+            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold transition-colors duration-300 ${isUrgent ? "text-destructive" : ""}`}>
               {timeLeft}
             </span>
           </div>
