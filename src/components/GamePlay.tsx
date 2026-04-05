@@ -150,14 +150,14 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
               <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
               <circle
                 cx="60" cy="60" r="54" fill="none"
-                stroke={isUrgent ? "hsl(var(--destructive))" : isTeamA ? "hsl(var(--team-a))" : "hsl(var(--team-b))"}
+                stroke={getTimerColor()}
                 strokeWidth="8" strokeLinecap="round"
                 strokeDasharray={circumference}
                 strokeDashoffset={circumference * (1 - progress)}
                 className="transition-all duration-1000 linear"
               />
             </svg>
-            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold ${isUrgent ? "text-destructive animate-countdown-pulse" : ""}`}>
+            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold ${isUrgent ? "text-destructive animate-countdown-pulse" : ""} ${isBlinking ? "animate-pulse" : ""}`}>
               {timeLeft}
             </span>
           </div>
