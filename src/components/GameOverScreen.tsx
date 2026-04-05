@@ -1,5 +1,32 @@
+import { useState, useEffect } from "react";
 import { GameState } from "@/lib/gameTypes";
-import { Crown, RotateCcw, Trophy, Scale } from "lucide-react";
+import { Crown, RotateCcw, Trophy, Scale, PartyPopper, Sparkles } from "lucide-react";
+
+const WINNER_LINES = [
+  "Someone stop them 😄",
+  "Too good for this game!",
+  "Are you cheating or what? 👀",
+  "Absolute legends! 🏆",
+  "Unstoppable force! 💪",
+];
+
+const RUNNER_UP_LINES = [
+  "Blame the timer 😅",
+  "That was rigged!",
+  "We demand a rematch!",
+  "Close but no cigar 🤏",
+  "Next time for sure! 💪",
+];
+
+const TIE_LINES = [
+  "What a showdown! 🤯",
+  "Nobody loses today!",
+  "The universe couldn't decide 🌀",
+];
+
+function pickRandom(arr: string[]) {
+  return arr[Math.floor(Math.random() * arr.length)];
+}
 
 interface GameOverScreenProps {
   game: GameState;
@@ -11,38 +38,76 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
   const winner = teamA.score > teamB.score ? 0 : teamB.score > teamA.score ? 1 : -1;
   const isTie = winner === -1;
 
+  const [winnerLine] = useState(() => pickRandom(WINNER_LINES));
+  const [runnerLine] = useState(() => pickRandom(RUNNER_UP_LINES));
+  const [tieLine] = useState(() => pickRandom(TIE_LINES));
+  const [showConfetti, setShowConfetti] = useState(true);
+
+  useEffect(() => {
+    const t = setTimeout(() => setShowConfetti(false), 3000);
+    return () => clearTimeout(t);
+  }, []);
+
   const sortedTeams = [...game.teams]
     .map((team, idx) => ({ team, originalIndex: idx }))
     .sort((a, b) => b.team.score - a.team.score);
 
   return (
-    <div className="min-h-screen flex flex-col items-center justify-center px-4">
-      <div className="text-center animate-slide-up-fade max-w-md w-full">
+    <div className="min-h-screen flex flex-col items-center justify-center px-4 relative overflow-hidden">
+      {/* Confetti burst */}
+      {showConfetti && !isTie && (
+        <div className="absolute inset-0 pointer-events-none z-10">
+          {Array.from({ length: 20 }).map((_, i) => (
+            <div
+              key={i}
+              className="absolute text-2xl animate-bounce"
+              style={{
+                left: `${Math.random() * 100}%`,
+                top: `${Math.random() * 60}%`,
+                animationDelay: `${Math.random() * 1}s`,
+                animationDuration: `${1 + Math.random() * 2}s`,
+                opacity: 1 - i * 0.03,
+              }}
+            >
+              {["🎉", "🎊", "✨", "⭐", "🌟"][i % 5]}
+            </div>
+          ))}
+        </div>
+      )}
+
+      <div className="text-center animate-slide-up-fade max-w-md w-full relative z-20">
         {/* Icon */}
         <div className="relative mb-6">
           {isTie ? (
-            <Scale className="w-16 h-16 mx-auto text-muted-foreground" />
+            <Scale className="w-16 h-16 mx-auto text-muted-foreground animate-pulse" />
           ) : (
-            <>
-              <Crown className="w-16 h-16 mx-auto text-accent" />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="w-16 h-16 rounded-full bg-accent/20 animate-pulse-ring" />
+            <div className="relative">
+              <div className="flex items-center justify-center gap-2">
+                <PartyPopper className="w-8 h-8 text-accent animate-bounce" style={{ animationDelay: '0.2s' }} />
+                <Trophy className="w-16 h-16 text-accent animate-bounce" />
+                <PartyPopper className="w-8 h-8 text-accent animate-bounce" style={{ animationDelay: '0.4s' }} />
               </div>
-            </>
+              <div className="absolute inset-0 flex items-center justify-center">
+                <div className="w-20 h-20 rounded-full bg-accent/20 animate-ping" style={{ animationDuration: '2s' }} />
+              </div>
+              <Sparkles className="absolute -top-2 -right-2 w-6 h-6 text-accent animate-pulse" />
+              <Sparkles className="absolute -bottom-1 -left-2 w-5 h-5 text-accent animate-pulse" style={{ animationDelay: '0.5s' }} />
+            </div>
           )}
         </div>
 
         <h1 className="text-4xl sm:text-5xl font-bold mb-2 text-glow-accent">
           {isTie ? "It's a Tie!" : `${game.teams[winner as number].name} Wins!`}
         </h1>
-        <p className="text-muted-foreground mb-8 text-lg">
-          {isTie ? "What a match! Play again to break the tie." : "What a game! Congratulations! 🎉"}
+        <p className="text-muted-foreground mb-8 text-lg italic">
+          {isTie ? tieLine : winnerLine}
         </p>
 
         {/* Leaderboard */}
         <div className="flex flex-col gap-4 mb-10">
           {sortedTeams.map(({ team, originalIndex }, rank) => {
             const isWinner = !isTie && rank === 0;
+            const isRunnerUp = !isTie && rank === 1;
             const isA = originalIndex === 0;
             const rankedPlayers = [...team.players].sort((a, b) => b.score - a.score);
             const topPlayers = rankedPlayers.slice(0, 3);
@@ -64,7 +129,7 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
                     <span className={`text-2xl font-bold ${
                       isWinner ? "text-accent" : "text-muted-foreground"
                     }`}>
-                      {isWinner ? <Trophy className="w-6 h-6" /> : `#${rank + 1}`}
+                      {isWinner ? <Trophy className="w-6 h-6 animate-bounce" /> : `#${rank + 1}`}
                     </span>
                     <div className="text-left">
                       <p className={`font-display font-semibold ${isA ? "text-team-a" : "text-team-b"}`}>
@@ -79,6 +144,14 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
                     {team.score}
                   </p>
                 </div>
+
+                {/* Fun line for runner-up */}
+                {isRunnerUp && (
+                  <p className="text-xs text-muted-foreground italic mt-1 ml-9">
+                    {runnerLine}
+                  </p>
+                )}
+
                 {/* Score bar */}
                 <div className="mt-3 h-2 rounded-full bg-muted overflow-hidden">
                   <div
