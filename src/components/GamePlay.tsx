@@ -145,7 +145,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
 
         {/* Timer - below words */}
         <div className="flex items-center gap-3 mt-2 shrink-0">
-          <div className="relative w-14 h-14">
+          <div className={`relative w-14 h-14 ${isBlinking ? "animate-countdown-pulse" : ""}`}>
             <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
               <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
               <circle
@@ -157,7 +157,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
                 className="transition-all duration-1000 linear"
               />
             </svg>
-            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold ${isUrgent ? "text-destructive animate-countdown-pulse" : ""} ${isBlinking ? "animate-pulse" : ""}`}>
+            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold transition-colors duration-300 ${isBlinking ? "animate-timer-blink" : ""} ${isUrgent ? "text-destructive" : ""}`}>
               {timeLeft}
             </span>
           </div>
