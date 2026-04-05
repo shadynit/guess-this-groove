@@ -400,19 +400,23 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 <span className="text-sm font-medium">Words per turn</span>
               </div>
               <div className="flex gap-2">
-                {([5, 6] as const).map((w) => (
-                  <button
-                    key={w}
-                    onClick={() => setWordsPerTurn(w)}
-                    className={`flex-1 py-2 rounded-md text-sm font-semibold transition-all active:scale-95 ${
-                      wordsPerTurn === w
-                        ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
-                        : "bg-muted text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {w}
-                  </button>
-                ))}
+                {([5, 7, 10] as const).map((w) => {
+                  const labels: Record<number, string> = { 5: "😌 Chill", 7: "⚡ Fast", 10: "🔥 Insane" };
+                  return (
+                    <button
+                      key={w}
+                      onClick={() => setWordsPerTurn(w)}
+                      className={`flex-1 py-2 rounded-md text-xs font-semibold transition-all active:scale-95 ${
+                        wordsPerTurn === w
+                          ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
+                          : "bg-muted text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      <div>{w}</div>
+                      <div className="text-[10px] opacity-80">{labels[w]}</div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <div className="flex-1">
