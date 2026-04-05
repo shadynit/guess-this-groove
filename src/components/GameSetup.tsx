@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert, Trophy, Ban } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
@@ -35,7 +35,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [teamAPlayers, setTeamAPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [teamBPlayers, setTeamBPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
-  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 6>(5);
+  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7 | 10>(5);
   const [totalRounds, setTotalRounds] = useState(4);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
   const [adultMode, setAdultMode] = useState(false);
@@ -256,6 +256,22 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   <Tags className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                   <p><strong className="text-foreground">Word Categories</strong> — Choose topics or mix them all</p>
                 </div>
+                <div className="flex items-start gap-3">
+                  <Flame className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">18+ Adult Mode</strong> — Toggle spicy & adult words for grown-up fun</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Trophy className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Live Leaderboard</strong> — Track scores and top players in real-time</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <RotateCcw className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Unlimited Replay</strong> — Play as many games as you want, no limits</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Ban className="w-5 h-5 text-team-a mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">No Ads</strong> — 100% ad-free experience, forever</p>
+                </div>
               </div>
             </DialogContent>
           </Dialog>
@@ -384,19 +400,23 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 <span className="text-sm font-medium">Words per turn</span>
               </div>
               <div className="flex gap-2">
-                {([5, 6] as const).map((w) => (
-                  <button
-                    key={w}
-                    onClick={() => setWordsPerTurn(w)}
-                    className={`flex-1 py-2 rounded-md text-sm font-semibold transition-all active:scale-95 ${
-                      wordsPerTurn === w
-                        ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
-                        : "bg-muted text-muted-foreground hover:text-foreground"
-                    }`}
-                  >
-                    {w}
-                  </button>
-                ))}
+                {([5, 7, 10] as const).map((w) => {
+                  const labels: Record<number, string> = { 5: "😌 Chill", 7: "⚡ Fast", 10: "🔥 Insane" };
+                  return (
+                    <button
+                      key={w}
+                      onClick={() => setWordsPerTurn(w)}
+                      className={`flex-1 py-2 rounded-md text-xs font-semibold transition-all active:scale-95 ${
+                        wordsPerTurn === w
+                          ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
+                          : "bg-muted text-muted-foreground hover:text-foreground"
+                      }`}
+                    >
+                      <div>{w}</div>
+                      <div className="text-[10px] opacity-80">{labels[w]}</div>
+                    </button>
+                  );
+                })}
               </div>
             </div>
             <div className="flex-1">
