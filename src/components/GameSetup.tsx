@@ -256,6 +256,22 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   <Tags className="w-5 h-5 text-primary mt-0.5 shrink-0" />
                   <p><strong className="text-foreground">Word Categories</strong> — Choose topics or mix them all</p>
                 </div>
+                <div className="flex items-start gap-3">
+                  <Flame className="w-5 h-5 text-destructive mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">18+ Adult Mode</strong> — Toggle spicy & adult words for grown-up fun</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Trophy className="w-5 h-5 text-accent mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Live Leaderboard</strong> — Track scores and top players in real-time</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <RotateCcw className="w-5 h-5 text-primary mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">Unlimited Replay</strong> — Play as many games as you want, no limits</p>
+                </div>
+                <div className="flex items-start gap-3">
+                  <Ban className="w-5 h-5 text-team-a mt-0.5 shrink-0" />
+                  <p><strong className="text-foreground">No Ads</strong> — 100% ad-free experience, forever</p>
+                </div>
               </div>
             </DialogContent>
           </Dialog>
