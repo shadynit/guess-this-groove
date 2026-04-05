@@ -69,6 +69,14 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
 
   const progress = timeLeft / game.roundTime;
   const isUrgent = timeLeft <= 5;
+  const isBlinking = timeLeft <= 10 && timeLeft > 0;
+
+  const getTimerColor = () => {
+    if (timeLeft <= 5) return "hsl(var(--destructive))";
+    if (timeLeft <= 10) return "hsl(var(--accent))";
+    if (timeLeft <= 20) return "hsl(var(--secondary))";
+    return isTeamA ? "hsl(var(--team-a))" : "hsl(var(--team-b))";
+  };
   const circumference = 2 * Math.PI * 54;
   const guessedCount = words.filter((w) => w.guessed).length;
 
