@@ -97,13 +97,13 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       ...DEFAULT_GAME_STATE,
       teams: [
         {
-          name: teamAName || "Team Alpha",
+          name: teamAName || "Team Fire",
           players: teamAPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim(), score: 0 })),
           score: 0,
           roundsPlayed: 0,
         },
         {
-          name: teamBName || "Team Beta",
+          name: teamBName || "Team Ice",
           players: teamBPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim(), score: 0 })),
           score: 0,
           roundsPlayed: 0,
