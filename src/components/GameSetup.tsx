@@ -512,7 +512,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
             <Switch
               checked={adultMode}
               onCheckedChange={setAdultMode}
-              className="data-[state=checked]:bg-destructive"
+              className="data-[state=checked]:bg-accent"
             />
           </div>
         </div>
