@@ -178,7 +178,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           {/* Game Rules Dialog */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-all active:scale-[0.97] text-sm font-semibold">
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border border-primary/30 hover:border-primary/60 transition-all active:scale-[0.97] text-sm font-semibold" style={{ backgroundColor: 'hsl(16, 90%, 58%, 0.1)' }}>
                 <ScrollText className="w-5 h-5 text-primary" />
                 Game Rules
               </button>
