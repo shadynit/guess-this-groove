@@ -36,7 +36,7 @@ export interface GameState {
   currentTeamIndex: 0 | 1;
   currentPlayerIndex: number;
   roundTime: 30 | 60 | 90;
-  wordsPerTurn: 5 | 7 | 10;
+  wordsPerTurn: 5 | 7;
   totalRounds: number;
   currentRound: number;
   phase: "setup" | "ready" | "playing" | "turnEnd" | "gameOver";
