@@ -400,8 +400,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 <span className="text-sm font-medium">Words per turn</span>
               </div>
               <div className="flex gap-2">
-                {([5, 7, 10] as const).map((w) => {
-                  const labels: Record<number, string> = { 5: "😌 Chill", 7: "⚡ Fast", 10: "🔥 Insane" };
+                {([5, 7] as const).map((w) => {
+                  const labels: Record<number, string> = { 5: "😌 Chill", 7: "⚡ Fast" };
                   return (
                     <button
                       key={w}
