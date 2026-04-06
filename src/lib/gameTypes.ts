@@ -36,7 +36,7 @@ export interface GameState {
   currentTeamIndex: 0 | 1;
   currentPlayerIndex: number;
   roundTime: 30 | 60 | 90;
-  wordsPerTurn: 5 | 7 | 10;
+  wordsPerTurn: 5 | 7;
   totalRounds: number;
   currentRound: number;
   phase: "setup" | "ready" | "playing" | "turnEnd" | "gameOver";
@@ -46,8 +46,8 @@ export interface GameState {
 
 export const DEFAULT_GAME_STATE: GameState = {
   teams: [
-    { name: "Team Alpha", players: [], score: 0, roundsPlayed: 0 },
-    { name: "Team Beta", players: [], score: 0, roundsPlayed: 0 },
+    { name: "Team Fire", players: [], score: 0, roundsPlayed: 0 },
+    { name: "Team Ice", players: [], score: 0, roundsPlayed: 0 },
   ],
   currentTeamIndex: 0,
   currentPlayerIndex: 0,

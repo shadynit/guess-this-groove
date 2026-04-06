@@ -30,19 +30,19 @@ interface GameSetupProps {
 const NON_ADULT_CATEGORIES = (Object.keys(CATEGORY_LABELS) as WordCategory[]).filter(c => c !== "all");
 
 export default function GameSetup({ onStartGame }: GameSetupProps) {
-  const [teamAName, setTeamAName] = useState("Team Alpha");
-  const [teamBName, setTeamBName] = useState("Team Beta");
+  const [teamAName, setTeamAName] = useState("Team Fire");
+  const [teamBName, setTeamBName] = useState("Team Ice");
   const [teamAPlayers, setTeamAPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [teamBPlayers, setTeamBPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
-  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7 | 10>(5);
+  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7>(5);
   const [totalRounds, setTotalRounds] = useState(4);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
   const [adultMode, setAdultMode] = useState(false);
 
   const resetToDefaults = () => {
-    setTeamAName("Team Alpha");
-    setTeamBName("Team Beta");
+    setTeamAName("Team Fire");
+    setTeamBName("Team Ice");
     setTeamAPlayers(["Player 1", "Player 2"]);
     setTeamBPlayers(["Player 1", "Player 2"]);
     setRoundTime(30);
@@ -97,13 +97,13 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       ...DEFAULT_GAME_STATE,
       teams: [
         {
-          name: teamAName || "Team Alpha",
+          name: teamAName || "Team Fire",
           players: teamAPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim(), score: 0 })),
           score: 0,
           roundsPlayed: 0,
         },
         {
-          name: teamBName || "Team Beta",
+          name: teamBName || "Team Ice",
           players: teamBPlayers.filter((p) => p.trim()).map((p) => ({ name: p.trim(), score: 0 })),
           score: 0,
           roundsPlayed: 0,
@@ -178,7 +178,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           {/* Game Rules Dialog */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-card border border-border hover:border-primary/40 transition-all active:scale-[0.97] text-sm font-semibold">
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border border-primary/30 hover:border-primary/60 transition-all active:scale-[0.97] text-sm font-semibold" style={{ backgroundColor: 'hsl(16, 90%, 58%, 0.1)' }}>
                 <ScrollText className="w-5 h-5 text-primary" />
                 Game Rules
               </button>
@@ -231,8 +231,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           {/* Features Dialog */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-card border border-border hover:border-accent/40 transition-all active:scale-[0.97] text-sm font-semibold">
-                <Zap className="w-5 h-5 text-accent" />
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border border-primary/30 hover:border-primary/60 transition-all active:scale-[0.97] text-sm font-semibold" style={{ backgroundColor: 'hsl(16, 90%, 58%, 0.1)' }}>
+                <Zap className="w-5 h-5 text-primary" />
                 Features
               </button>
             </DialogTrigger>
@@ -400,8 +400,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 <span className="text-sm font-medium">Words per turn</span>
               </div>
               <div className="flex gap-2">
-                {([5, 7, 10] as const).map((w) => {
-                  const labels: Record<number, string> = { 5: "😌 Chill", 7: "⚡ Fast", 10: "🔥 Insane" };
+                {([5, 7] as const).map((w) => {
+                  const labels: Record<number, string> = { 5: "😌 Chill", 7: "⚡ Fast" };
                   return (
                     <button
                       key={w}
