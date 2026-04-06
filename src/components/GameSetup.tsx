@@ -385,7 +385,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                     onClick={() => setRoundTime(t)}
                     className={`flex-1 py-2 rounded-md text-sm font-semibold transition-all active:scale-95 ${
                       roundTime === t
-                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                        ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
                         : "bg-muted text-muted-foreground hover:text-foreground"
                     }`}
                   >
