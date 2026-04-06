@@ -72,7 +72,7 @@ export default function TurnEndScreen({ game, lastScore, onNext, isLastTurn, onN
 
         <button
           onClick={onNext}
-          className="w-full py-4 rounded-lg bg-primary text-primary-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-primary/30"
+          className="w-full py-4 rounded-lg bg-accent text-accent-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-accent/30"
         >
           {isLastTurn ? "🏆 Show Winner" : "Next Turn"}
         </button>
