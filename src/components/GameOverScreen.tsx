@@ -196,7 +196,7 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
 
         <button
           onClick={onPlayAgain}
-          className="w-full py-4 rounded-lg bg-primary text-primary-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
+          className="w-full py-4 rounded-lg bg-accent text-accent-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-accent/30 flex items-center justify-center gap-2"
         >
           <RotateCcw className="w-5 h-5" />
           New Game

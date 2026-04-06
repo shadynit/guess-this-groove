@@ -523,7 +523,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           onClick={handleStart}
           className={`w-full py-4 rounded-lg text-lg font-display font-bold transition-all active:scale-[0.97] ${
             canStart
-              ? "bg-primary text-primary-foreground shadow-lg shadow-primary/30 hover:shadow-primary/50"
+              ? "bg-accent text-accent-foreground shadow-lg shadow-accent/30 hover:shadow-accent/50"
               : "bg-muted text-muted-foreground cursor-not-allowed"
           }`}
         >
