@@ -231,8 +231,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           {/* Features Dialog */}
           <Dialog>
             <DialogTrigger asChild>
-              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg bg-card border border-border hover:border-accent/40 transition-all active:scale-[0.97] text-sm font-semibold">
-                <Zap className="w-5 h-5 text-accent" />
+              <button className="flex-1 flex items-center justify-center gap-2 py-3 rounded-lg border border-primary/30 hover:border-primary/60 transition-all active:scale-[0.97] text-sm font-semibold" style={{ backgroundColor: 'hsl(16, 90%, 58%, 0.1)' }}>
+                <Zap className="w-5 h-5 text-primary" />
                 Features
               </button>
             </DialogTrigger>

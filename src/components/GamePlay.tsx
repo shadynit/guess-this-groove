@@ -145,19 +145,19 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
 
         {/* Timer - below words */}
         <div className="flex items-center gap-3 mt-2 shrink-0">
-          <div className={`relative w-14 h-14 ${isBlinking ? "animate-countdown-pulse" : ""}`}>
+          <div className={`relative w-[4.2rem] h-[4.2rem] ${isBlinking ? "animate-countdown-pulse" : ""}`}>
             <svg className="w-full h-full -rotate-90" viewBox="0 0 120 120">
-              <circle cx="60" cy="60" r="54" fill="none" stroke="hsl(var(--muted))" strokeWidth="8" />
+              <circle cx="60" cy="60" r="52" fill="none" stroke="hsl(var(--muted))" strokeWidth="12" />
               <circle
-                cx="60" cy="60" r="54" fill="none"
+                cx="60" cy="60" r="52" fill="none"
                 stroke={getTimerColor()}
-                strokeWidth="8" strokeLinecap="round"
-                strokeDasharray={circumference}
-                strokeDashoffset={circumference * (1 - progress)}
+                strokeWidth="12" strokeLinecap="round"
+                strokeDasharray={2 * Math.PI * 52}
+                strokeDashoffset={2 * Math.PI * 52 * (1 - progress)}
                 className={`transition-all duration-1000 linear ${isBlinking ? "animate-timer-blink" : ""}`}
               />
             </svg>
-            <span className={`absolute inset-0 flex items-center justify-center text-base font-display font-bold transition-colors duration-300 ${isUrgent ? "text-destructive" : ""}`}>
+            <span className={`absolute inset-0 flex items-center justify-center text-lg font-display font-bold transition-colors duration-300 ${isUrgent ? "text-destructive" : ""}`}>
               {timeLeft}
             </span>
           </div>
