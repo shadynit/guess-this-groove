@@ -470,7 +470,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               onClick={() => toggleCategory("all")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95 flex items-center gap-1 ${
                 selectedCategories.includes("all")
-                  ? "bg-primary text-primary-foreground shadow-sm"
+                  ? "bg-accent text-accent-foreground shadow-sm"
                   : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >
