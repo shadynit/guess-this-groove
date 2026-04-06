@@ -30,12 +30,12 @@ interface GameSetupProps {
 const NON_ADULT_CATEGORIES = (Object.keys(CATEGORY_LABELS) as WordCategory[]).filter(c => c !== "all");
 
 export default function GameSetup({ onStartGame }: GameSetupProps) {
-  const [teamAName, setTeamAName] = useState("Team Alpha");
-  const [teamBName, setTeamBName] = useState("Team Beta");
+  const [teamAName, setTeamAName] = useState("Team Fire");
+  const [teamBName, setTeamBName] = useState("Team Ice");
   const [teamAPlayers, setTeamAPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [teamBPlayers, setTeamBPlayers] = useState<string[]>(["Player 1", "Player 2"]);
   const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
-  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7 | 10>(5);
+  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7>(5);
   const [totalRounds, setTotalRounds] = useState(4);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
   const [adultMode, setAdultMode] = useState(false);
