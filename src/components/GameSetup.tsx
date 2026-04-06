@@ -41,8 +41,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [adultMode, setAdultMode] = useState(false);
 
   const resetToDefaults = () => {
-    setTeamAName("Team Alpha");
-    setTeamBName("Team Beta");
+    setTeamAName("Team Fire");
+    setTeamBName("Team Ice");
     setTeamAPlayers(["Player 1", "Player 2"]);
     setTeamBPlayers(["Player 1", "Player 2"]);
     setRoundTime(30);
