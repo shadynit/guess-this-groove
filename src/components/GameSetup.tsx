@@ -385,7 +385,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                     onClick={() => setRoundTime(t)}
                     className={`flex-1 py-2 rounded-md text-sm font-semibold transition-all active:scale-95 ${
                       roundTime === t
-                        ? "bg-primary text-primary-foreground shadow-lg shadow-primary/25"
+                        ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
                         : "bg-muted text-muted-foreground hover:text-foreground"
                     }`}
                   >
@@ -470,7 +470,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               onClick={() => toggleCategory("all")}
               className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95 flex items-center gap-1 ${
                 selectedCategories.includes("all")
-                  ? "bg-primary text-primary-foreground shadow-sm"
+                  ? "bg-accent text-accent-foreground shadow-sm"
                   : "bg-muted text-muted-foreground hover:text-foreground"
               }`}
             >
@@ -485,7 +485,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   onClick={() => toggleCategory(cat)}
                   className={`px-3 py-1.5 rounded-full text-xs font-semibold transition-all active:scale-95 flex items-center gap-1 ${
                     isSelected
-                      ? "bg-primary text-primary-foreground shadow-sm"
+                      ? "bg-accent text-accent-foreground shadow-sm"
                       : "bg-muted text-muted-foreground hover:text-foreground"
                   }`}
                 >
@@ -512,7 +512,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
             <Switch
               checked={adultMode}
               onCheckedChange={setAdultMode}
-              className="data-[state=checked]:bg-destructive"
+              className="data-[state=checked]:bg-accent"
             />
           </div>
         </div>
