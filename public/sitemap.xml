@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <url>
+    <loc>https://wordrush.fun/</loc>
+    <priority>1.0</priority>
+  </url>
+  <url>
+    <loc>https://wordrush.fun/privacy</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://wordrush.fun/terms</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://wordrush.fun/contact</loc>
+    <priority>0.5</priority>
+  </url>
+  <url>
+    <loc>https://wordrush.fun/about</loc>
+    <priority>0.7</priority>
+  </url>
+</urlset>
