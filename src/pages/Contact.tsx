@@ -1,8 +1,18 @@
 import { Link } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 import { ArrowLeft, Mail, Globe } from "lucide-react";
 
 const Contact = () => (
   <div className="min-h-screen bg-background text-foreground p-6 max-w-2xl mx-auto">
+    <Helmet>
+      <title>Contact Us - Word Rush | wordrush.fun</title>
+      <meta name="description" content="Get in touch with the Word Rush team. Reach us via email for support, feedback, or questions about the party word game." />
+      <link rel="canonical" href="https://wordrush.fun/contact" />
+      <meta property="og:title" content="Contact - Word Rush" />
+      <meta property="og:description" content="Contact the Word Rush team for support or feedback." />
+      <meta property="og:url" content="https://wordrush.fun/contact" />
+    </Helmet>
+
     <Link to="/" className="inline-flex items-center gap-2 text-accent hover:underline mb-6">
       <ArrowLeft className="w-4 h-4" /> Back
     </Link>
