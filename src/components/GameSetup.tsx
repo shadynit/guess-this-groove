@@ -532,8 +532,19 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
 
         <InstallPrompt />
 
+        {/* Footer Links */}
+        <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-6 text-xs text-muted-foreground/60">
+          <a href="/privacy" className="hover:text-accent transition-colors">Privacy</a>
+          <span>·</span>
+          <a href="/terms" className="hover:text-accent transition-colors">Terms</a>
+          <span>·</span>
+          <a href="/contact" className="hover:text-accent transition-colors">Contact</a>
+          <span>·</span>
+          <a href="/about" className="hover:text-accent transition-colors">About</a>
+        </div>
+
         {/* Version */}
-        <p className="text-center text-xs text-muted-foreground/50 mt-6">v2.2</p>
+        <p className="text-center text-xs text-muted-foreground/50 mt-2">v2.2</p>
         <FeedbackButton />
       </div>
     </div>
