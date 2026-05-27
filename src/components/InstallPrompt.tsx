@@ -51,9 +51,10 @@ export default function InstallPrompt() {
         onClick={handleInstall}
         aria-label="Install Word Rush"
         title="Install Word Rush"
-        className="fixed bottom-4 left-4 z-50 w-12 h-12 rounded-full bg-primary text-primary-foreground shadow-lg shadow-primary/30 flex items-center justify-center active:scale-95 transition-all animate-slide-up-fade"
+        className="inline-flex items-center gap-2 px-3 py-2 rounded-full bg-primary/10 text-primary border border-primary/30 text-xs font-medium hover:bg-primary/20 active:scale-95 transition-all"
       >
-        <Download className="w-5 h-5" />
+        <Download className="w-4 h-4" />
+        <span>Install app</span>
       </button>
 
       {showInstructions && (

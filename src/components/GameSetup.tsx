@@ -530,8 +530,6 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
           {canStart ? "Let's Go!" : "Add at least 2 players per team"}
         </button>
 
-        <InstallPrompt />
-
         {/* Footer Links */}
         <div className="flex flex-wrap items-center justify-center gap-x-3 gap-y-1 mt-6 text-xs text-muted-foreground/60">
           <a href="/privacy" className="hover:text-accent transition-colors">Privacy</a>
@@ -545,6 +543,9 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
 
         {/* Version */}
         <p className="text-center text-xs text-muted-foreground/50 mt-2">v2.2</p>
+        <div className="flex justify-center mt-3">
+          <InstallPrompt />
+        </div>
         <FeedbackButton />
       </div>
     </div>
