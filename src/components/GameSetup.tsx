@@ -183,25 +183,6 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive transition-colors active:scale-95">
-                <X className="w-3 h-3" /> Clear players
-              </button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Clear all players?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This will remove all saved player and team names. Your saved roster will no longer be remembered.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={clearPlayers}>Yes, Clear</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
           </div>
           <ThemeToggle />
         </div>
