@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { GameState } from "@/lib/gameTypes";
-import { Crown, RotateCcw, Trophy, Scale, PartyPopper, Sparkles } from "lucide-react";
+import { Crown, RotateCcw, Trophy, Scale, PartyPopper, Sparkles, Swords } from "lucide-react";
 
 const WINNER_LINES = [
   "Someone stop them 😄",
@@ -31,9 +31,10 @@ function pickRandom(arr: string[]) {
 interface GameOverScreenProps {
   game: GameState;
   onPlayAgain: () => void;
+  onTiebreaker?: () => void;
 }
 
-export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProps) {
+export default function GameOverScreen({ game, onPlayAgain, onTiebreaker }: GameOverScreenProps) {
   const [teamA, teamB] = game.teams;
   const winner = teamA.score > teamB.score ? 0 : teamB.score > teamA.score ? 1 : -1;
   const isTie = winner === -1;
@@ -194,13 +195,24 @@ export default function GameOverScreen({ game, onPlayAgain }: GameOverScreenProp
           })}
         </div>
 
-        <button
-          onClick={onPlayAgain}
-          className="w-full py-4 rounded-lg bg-accent text-accent-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-accent/30 flex items-center justify-center gap-2"
-        >
-          <RotateCcw className="w-5 h-5" />
-          New Game
-        </button>
+        <div className="flex flex-col gap-3">
+          {isTie && onTiebreaker && (
+            <button
+              onClick={onTiebreaker}
+              className="w-full py-4 rounded-lg bg-primary text-primary-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
+            >
+              <Swords className="w-5 h-5" />
+              Play 3 More Rounds
+            </button>
+          )}
+          <button
+            onClick={onPlayAgain}
+            className="w-full py-4 rounded-lg bg-accent text-accent-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-accent/30 flex items-center justify-center gap-2"
+          >
+            <RotateCcw className="w-5 h-5" />
+            New Game
+          </button>
+        </div>
       </div>
     </div>
   );
