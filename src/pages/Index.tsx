@@ -113,6 +113,16 @@ const Index = () => {
     setGame(DEFAULT_GAME_STATE);
   };
 
+  const handleTiebreaker = () => {
+    setGame((g) => ({
+      ...g,
+      totalRounds: g.totalRounds + 3,
+      currentRound: g.totalRounds + 1,
+      currentTeamIndex: 0,
+      phase: "ready",
+    }));
+  };
+
   switch (game.phase) {
     case "setup":
       return <GameSetup onStartGame={handleStartGame} />;
@@ -123,7 +133,7 @@ const Index = () => {
     case "turnEnd":
       return <TurnEndScreen game={game} lastScore={lastScore} onNext={handleNextTurn} isLastTurn={isLastTurn} onNewGame={handlePlayAgain} />;
     case "gameOver":
-      return <GameOverScreen game={game} onPlayAgain={handlePlayAgain} />;
+      return <GameOverScreen game={game} onPlayAgain={handlePlayAgain} onTiebreaker={handleTiebreaker} />;
     default:
       return null;
   }
