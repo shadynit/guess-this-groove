@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
 import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert, Trophy, Ban } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
@@ -29,16 +29,55 @@ interface GameSetupProps {
 
 const NON_ADULT_CATEGORIES = (Object.keys(CATEGORY_LABELS) as WordCategory[]).filter(c => c !== "all");
 
+const PLAYERS_STORAGE_KEY = "wordrush_players";
+
+interface SavedPlayers {
+  teamAName: string;
+  teamBName: string;
+  teamAPlayers: string[];
+  teamBPlayers: string[];
+}
+
+const loadSavedPlayers = (): SavedPlayers | null => {
+  try {
+    const raw = localStorage.getItem(PLAYERS_STORAGE_KEY);
+    if (!raw) return null;
+    return JSON.parse(raw) as SavedPlayers;
+  } catch {
+    return null;
+  }
+};
+
 export default function GameSetup({ onStartGame }: GameSetupProps) {
-  const [teamAName, setTeamAName] = useState("Team Fire");
-  const [teamBName, setTeamBName] = useState("Team Ice");
-  const [teamAPlayers, setTeamAPlayers] = useState<string[]>(["Player 1", "Player 2"]);
-  const [teamBPlayers, setTeamBPlayers] = useState<string[]>(["Player 1", "Player 2"]);
+  const saved = loadSavedPlayers();
+  const [teamAName, setTeamAName] = useState(saved?.teamAName ?? "Team Fire");
+  const [teamBName, setTeamBName] = useState(saved?.teamBName ?? "Team Ice");
+  const [teamAPlayers, setTeamAPlayers] = useState<string[]>(saved?.teamAPlayers ?? ["Player 1", "Player 2"]);
+  const [teamBPlayers, setTeamBPlayers] = useState<string[]>(saved?.teamBPlayers ?? ["Player 1", "Player 2"]);
   const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
   const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7>(5);
-  const [totalRounds, setTotalRounds] = useState(4);
+  const [totalRounds, setTotalRounds] = useState(5);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
   const [adultMode, setAdultMode] = useState(false);
+
+  useEffect(() => {
+    try {
+      localStorage.setItem(
+        PLAYERS_STORAGE_KEY,
+        JSON.stringify({ teamAName, teamBName, teamAPlayers, teamBPlayers }),
+      );
+    } catch {}
+  }, [teamAName, teamBName, teamAPlayers, teamBPlayers]);
+
+  const clearPlayers = () => {
+    setTeamAName("Team Fire");
+    setTeamBName("Team Ice");
+    setTeamAPlayers(["Player 1", "Player 2"]);
+    setTeamBPlayers(["Player 1", "Player 2"]);
+    try {
+      localStorage.removeItem(PLAYERS_STORAGE_KEY);
+    } catch {}
+  };
 
   const resetToDefaults = () => {
     setTeamAName("Team Fire");
@@ -47,9 +86,12 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
     setTeamBPlayers(["Player 1", "Player 2"]);
     setRoundTime(30);
     setWordsPerTurn(5);
-    setTotalRounds(4);
+    setTotalRounds(5);
     setSelectedCategories(["all"]);
     setAdultMode(false);
+    try {
+      localStorage.removeItem(PLAYERS_STORAGE_KEY);
+    } catch {}
   };
 
   const addPlayer = (team: "a" | "b") => {
@@ -425,7 +467,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                 <span className="text-sm font-medium">Total rounds</span>
               </div>
               <div className="flex gap-2">
-                {[2, 4, 6].map((r) => (
+                {[3, 5, 7].map((r) => (
                   <button
                     key={r}
                     onClick={() => setTotalRounds(r)}
@@ -442,14 +484,14 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                   type="number"
                   min={1}
                   max={50}
-                  value={[2, 4, 6].includes(totalRounds) ? "" : totalRounds}
+                  value={[3, 5, 7].includes(totalRounds) ? "" : totalRounds}
                   placeholder="Custom"
                   onChange={(e) => {
                     const v = parseInt(e.target.value);
                     if (v >= 1 && v <= 50) setTotalRounds(v);
                   }}
                   className={`flex-1 py-2 rounded-md text-sm font-semibold text-center outline-none transition-all ${
-                    ![2, 4, 6].includes(totalRounds)
+                    ![3, 5, 7].includes(totalRounds)
                       ? "bg-accent text-accent-foreground shadow-lg shadow-accent/25"
                       : "bg-muted text-muted-foreground hover:text-foreground"
                   } placeholder:text-muted-foreground`}
