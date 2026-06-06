@@ -116,7 +116,7 @@ const Index = () => {
   const handleTiebreaker = () => {
     setGame((g) => ({
       ...g,
-      totalRounds: g.totalRounds + 3,
+      totalRounds: g.totalRounds + 1,
       currentRound: g.totalRounds + 1,
       currentTeamIndex: 0,
       phase: "ready",
