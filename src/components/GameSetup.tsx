@@ -168,6 +168,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       <div className="w-full max-w-2xl animate-slide-up-fade">
         {/* Theme toggle */}
         <div className="flex items-center justify-between mb-2">
+          <div className="flex items-center gap-3">
           <AlertDialog>
             <AlertDialogTrigger asChild>
               <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-foreground transition-colors active:scale-95">
@@ -187,6 +188,26 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
+          <AlertDialog>
+            <AlertDialogTrigger asChild>
+              <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive transition-colors active:scale-95">
+                <X className="w-3 h-3" /> Clear players
+              </button>
+            </AlertDialogTrigger>
+            <AlertDialogContent>
+              <AlertDialogHeader>
+                <AlertDialogTitle>Clear all players?</AlertDialogTitle>
+                <AlertDialogDescription>
+                  This will remove all saved player and team names. Your saved roster will no longer be remembered.
+                </AlertDialogDescription>
+              </AlertDialogHeader>
+              <AlertDialogFooter>
+                <AlertDialogCancel>Cancel</AlertDialogCancel>
+                <AlertDialogAction onClick={clearPlayers}>Yes, Clear</AlertDialogAction>
+              </AlertDialogFooter>
+            </AlertDialogContent>
+          </AlertDialog>
+          </div>
           <ThemeToggle />
         </div>
         {/* Title */}
