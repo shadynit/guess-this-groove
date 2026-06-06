@@ -202,7 +202,7 @@ export default function GameOverScreen({ game, onPlayAgain, onTiebreaker }: Game
               className="w-full py-4 rounded-lg bg-primary text-primary-foreground font-display font-bold text-lg transition-all active:scale-[0.97] shadow-lg shadow-primary/30 flex items-center justify-center gap-2"
             >
               <Swords className="w-5 h-5" />
-              Play 3 More Rounds
+              Play 1 More Round
             </button>
           )}
           <button

@@ -31,53 +31,48 @@ const NON_ADULT_CATEGORIES = (Object.keys(CATEGORY_LABELS) as WordCategory[]).fi
 
 const PLAYERS_STORAGE_KEY = "wordrush_players";
 
-interface SavedPlayers {
+interface SavedSettings {
   teamAName: string;
   teamBName: string;
   teamAPlayers: string[];
   teamBPlayers: string[];
+  roundTime?: 30 | 60 | 90;
+  wordsPerTurn?: 5 | 7;
+  totalRounds?: number;
+  selectedCategories?: WordCategory[];
+  adultMode?: boolean;
 }
 
-const loadSavedPlayers = (): SavedPlayers | null => {
+const loadSavedSettings = (): SavedSettings | null => {
   try {
     const raw = localStorage.getItem(PLAYERS_STORAGE_KEY);
     if (!raw) return null;
-    return JSON.parse(raw) as SavedPlayers;
+    return JSON.parse(raw) as SavedSettings;
   } catch {
     return null;
   }
 };
 
 export default function GameSetup({ onStartGame }: GameSetupProps) {
-  const saved = loadSavedPlayers();
+  const saved = loadSavedSettings();
   const [teamAName, setTeamAName] = useState(saved?.teamAName ?? "Team Fire");
   const [teamBName, setTeamBName] = useState(saved?.teamBName ?? "Team Ice");
   const [teamAPlayers, setTeamAPlayers] = useState<string[]>(saved?.teamAPlayers ?? ["Player 1", "Player 2"]);
   const [teamBPlayers, setTeamBPlayers] = useState<string[]>(saved?.teamBPlayers ?? ["Player 1", "Player 2"]);
-  const [roundTime, setRoundTime] = useState<30 | 60 | 90>(30);
-  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7>(5);
-  const [totalRounds, setTotalRounds] = useState(5);
-  const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(["all"]);
-  const [adultMode, setAdultMode] = useState(false);
+  const [roundTime, setRoundTime] = useState<30 | 60 | 90>(saved?.roundTime ?? 30);
+  const [wordsPerTurn, setWordsPerTurn] = useState<5 | 7>(saved?.wordsPerTurn ?? 5);
+  const [totalRounds, setTotalRounds] = useState(saved?.totalRounds ?? 5);
+  const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(saved?.selectedCategories ?? ["all"]);
+  const [adultMode, setAdultMode] = useState(saved?.adultMode ?? false);
 
   useEffect(() => {
     try {
       localStorage.setItem(
         PLAYERS_STORAGE_KEY,
-        JSON.stringify({ teamAName, teamBName, teamAPlayers, teamBPlayers }),
+        JSON.stringify({ teamAName, teamBName, teamAPlayers, teamBPlayers, roundTime, wordsPerTurn, totalRounds, selectedCategories, adultMode }),
       );
     } catch {}
-  }, [teamAName, teamBName, teamAPlayers, teamBPlayers]);
-
-  const clearPlayers = () => {
-    setTeamAName("Team Fire");
-    setTeamBName("Team Ice");
-    setTeamAPlayers(["Player 1", "Player 2"]);
-    setTeamBPlayers(["Player 1", "Player 2"]);
-    try {
-      localStorage.removeItem(PLAYERS_STORAGE_KEY);
-    } catch {}
-  };
+  }, [teamAName, teamBName, teamAPlayers, teamBPlayers, roundTime, wordsPerTurn, totalRounds, selectedCategories, adultMode]);
 
   const resetToDefaults = () => {
     setTeamAName("Team Fire");
@@ -185,25 +180,6 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
               <AlertDialogFooter>
                 <AlertDialogCancel>Cancel</AlertDialogCancel>
                 <AlertDialogAction onClick={resetToDefaults}>Yes, Reset</AlertDialogAction>
-              </AlertDialogFooter>
-            </AlertDialogContent>
-          </AlertDialog>
-          <AlertDialog>
-            <AlertDialogTrigger asChild>
-              <button className="flex items-center gap-1 text-xs text-muted-foreground hover:text-destructive transition-colors active:scale-95">
-                <X className="w-3 h-3" /> Clear players
-              </button>
-            </AlertDialogTrigger>
-            <AlertDialogContent>
-              <AlertDialogHeader>
-                <AlertDialogTitle>Clear all players?</AlertDialogTitle>
-                <AlertDialogDescription>
-                  This will remove all saved player and team names. Your saved roster will no longer be remembered.
-                </AlertDialogDescription>
-              </AlertDialogHeader>
-              <AlertDialogFooter>
-                <AlertDialogCancel>Cancel</AlertDialogCancel>
-                <AlertDialogAction onClick={clearPlayers}>Yes, Clear</AlertDialogAction>
               </AlertDialogFooter>
             </AlertDialogContent>
           </AlertDialog>
