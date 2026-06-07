@@ -27,6 +27,8 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   const [splashDismissed, setSplashDismissed] = useState(false);
   const [skipUsed, setSkipUsed] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
+  const touchStartX = useRef<number | null>(null);
+  const touchStartY = useRef<number | null>(null);
   const isTeamA = game.currentTeamIndex === 0;
   const team = game.teams[game.currentTeamIndex];
   const player = team.players[game.currentPlayerIndex];
@@ -61,12 +63,37 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   const skipWord = (index: number, e: React.MouseEvent) => {
     e.stopPropagation();
     if (skipUsed || finished || timedOut) return;
+    doSkip(index);
+  };
+
+  const doSkip = (index: number) => {
+    if (skipUsed || finished || timedOut) return;
     setWords((prev) =>
       prev.map((w, i) =>
         i === index ? { word: getRandomWord(game.adultMode, game.selectedCategories), guessed: false } : w
       )
     );
     setSkipUsed(true);
+  };
+
+  const handleTouchStart = (e: React.TouchEvent) => {
+    const t = e.touches[0];
+    touchStartX.current = t.clientX;
+    touchStartY.current = t.clientY;
+  };
+
+  const handleTouchEnd = (index: number, e: React.TouchEvent) => {
+    if (touchStartX.current == null || touchStartY.current == null) return;
+    const t = e.changedTouches[0];
+    const dx = t.clientX - touchStartX.current;
+    const dy = t.clientY - touchStartY.current;
+    touchStartX.current = null;
+    touchStartY.current = null;
+    if (Math.abs(dx) > 60 && Math.abs(dx) > Math.abs(dy) * 1.5) {
+      if (game.allowSkip && !skipUsed && !words[index].guessed) {
+        doSkip(index);
+      }
+    }
   };
 
   const allGuessed = words.every((w) => w.guessed);
@@ -141,6 +168,8 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
             <button
               key={i}
               onClick={() => toggleWord(i)}
+              onTouchStart={handleTouchStart}
+              onTouchEnd={(e) => handleTouchEnd(i, e)}
               disabled={!splashDismissed && timedOut}
               className={`w-full py-3 px-4 rounded-xl text-lg font-display font-bold transition-all active:scale-[0.97] border-2 text-left ${
                 w.guessed
