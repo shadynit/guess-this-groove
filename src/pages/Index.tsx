@@ -48,7 +48,6 @@ const Index = () => {
   }, [game]);
 
   const handleStartGame = (state: GameState) => {
-    resetWords();
     setGame(state);
   };
 
@@ -108,7 +107,6 @@ const Index = () => {
   };
 
   const handlePlayAgain = () => {
-    resetWords();
     clearGameState();
     setGame(DEFAULT_GAME_STATE);
   };
