@@ -93,8 +93,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   };
 
   const addPlayer = (team: "a" | "b") => {
-    if (team === "a") setTeamAPlayers([...teamAPlayers, ""]);
-    else setTeamBPlayers([...teamBPlayers, ""]);
+    if (team === "a") setTeamAPlayers([...teamAPlayers, `Player ${teamAPlayers.length + 1}`]);
+    else setTeamBPlayers([...teamBPlayers, `Player ${teamBPlayers.length + 1}`]);
   };
 
   const removePlayer = (team: "a" | "b", idx: number) => {
@@ -343,7 +343,14 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                     <input
                       value={p}
                       onChange={(e) => updatePlayer("a", i, e.target.value)}
-                      onFocus={(e) => e.target.select()}
+                      onFocus={(e) => {
+                        const t = e.target;
+                        setTimeout(() => t.select(), 10);
+                      }}
+                      onClick={(e) => {
+                        const t = e.currentTarget;
+                        setTimeout(() => t.select(), 10);
+                      }}
                       placeholder="Type player name"
                       className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
                     />
@@ -389,7 +396,14 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                     <input
                       value={p}
                       onChange={(e) => updatePlayer("b", i, e.target.value)}
-                      onFocus={(e) => e.target.select()}
+                      onFocus={(e) => {
+                        const t = e.target;
+                        setTimeout(() => t.select(), 10);
+                      }}
+                      onClick={(e) => {
+                        const t = e.currentTarget;
+                        setTimeout(() => t.select(), 10);
+                      }}
                       placeholder="Type player name"
                       className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-b/50 placeholder:text-muted-foreground/60 placeholder:italic"
                     />
