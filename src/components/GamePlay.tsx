@@ -2,6 +2,7 @@ import { useState, useEffect, useRef } from "react";
 import { getRandomWord } from "@/lib/words";
 import { playBuzzer } from "@/lib/buzzer";
 import { GameState } from "@/lib/gameTypes";
+import { SkipForward } from "lucide-react";
 
 interface GamePlayProps {
   game: GameState;
@@ -24,6 +25,7 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
   );
   const [finished, setFinished] = useState(false);
   const [splashDismissed, setSplashDismissed] = useState(false);
+  const [skipUsed, setSkipUsed] = useState(false);
   const timerRef = useRef<ReturnType<typeof setInterval>>();
   const isTeamA = game.currentTeamIndex === 0;
   const team = game.teams[game.currentTeamIndex];
@@ -54,6 +56,17 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
     setWords((prev) =>
       prev.map((w, i) => (i === index ? { ...w, guessed: !w.guessed } : w))
     );
+  };
+
+  const skipWord = (index: number, e: React.MouseEvent) => {
+    e.stopPropagation();
+    if (skipUsed || finished || timedOut) return;
+    setWords((prev) =>
+      prev.map((w, i) =>
+        i === index ? { word: getRandomWord(game.adultMode, game.selectedCategories), guessed: false } : w
+      )
+    );
+    setSkipUsed(true);
   };
 
   const allGuessed = words.every((w) => w.guessed);
@@ -137,7 +150,17 @@ export default function GamePlay({ game, onTurnEnd }: GamePlayProps) {
             >
               <span className="flex items-center justify-between">
                 <span>{w.word}</span>
-                {w.guessed && <span className="text-green-400 text-lg">✓</span>}
+                {w.guessed ? (
+                  <span className="text-green-400 text-lg">✓</span>
+                ) : game.allowSkip && !skipUsed && !timedOut ? (
+                  <span
+                    role="button"
+                    onClick={(e) => skipWord(i, e)}
+                    className="flex items-center gap-1 text-xs text-accent bg-accent/10 hover:bg-accent/20 px-2 py-1 rounded-md transition-colors"
+                  >
+                    <SkipForward className="w-3 h-3" /> Skip
+                  </span>
+                ) : null}
               </span>
             </button>
           ))}
