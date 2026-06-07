@@ -42,6 +42,7 @@ export interface GameState {
   phase: "setup" | "ready" | "playing" | "turnEnd" | "gameOver";
   adultMode: boolean;
   selectedCategories: WordCategory[];
+  allowSkip: boolean;
 }
 
 export const DEFAULT_GAME_STATE: GameState = {
@@ -58,4 +59,5 @@ export const DEFAULT_GAME_STATE: GameState = {
   phase: "setup",
   adultMode: false,
   selectedCategories: ["all"],
+  allowSkip: false,
 };

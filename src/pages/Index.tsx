@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
 import { GameState, DEFAULT_GAME_STATE } from "@/lib/gameTypes";
-import { resetWords } from "@/lib/words";
 import GameSetup from "@/components/GameSetup";
 import ReadyScreen from "@/components/ReadyScreen";
 import GamePlay from "@/components/GamePlay";
@@ -48,7 +47,6 @@ const Index = () => {
   }, [game]);
 
   const handleStartGame = (state: GameState) => {
-    resetWords();
     setGame(state);
   };
 
@@ -108,7 +106,6 @@ const Index = () => {
   };
 
   const handlePlayAgain = () => {
-    resetWords();
     clearGameState();
     setGame(DEFAULT_GAME_STATE);
   };

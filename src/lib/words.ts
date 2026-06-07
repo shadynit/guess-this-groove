@@ -299,7 +299,23 @@ const WORD_BANK: WordEntry[] = [
   ] as const).map(w => ({ word: w, adult: true, category: "random" as WordCategory })),
 ];
 
-let usedIndices = new Set<number>();
+const USED_STORAGE_KEY = "wordrush_used_words";
+
+const loadUsed = (): Set<number> => {
+  try {
+    const raw = localStorage.getItem(USED_STORAGE_KEY);
+    if (raw) return new Set<number>(JSON.parse(raw));
+  } catch {}
+  return new Set<number>();
+};
+
+const saveUsed = () => {
+  try {
+    localStorage.setItem(USED_STORAGE_KEY, JSON.stringify(Array.from(usedIndices)));
+  } catch {}
+};
+
+let usedIndices = loadUsed();
 
 export function getRandomWord(allowAdult: boolean = false, categories: WordCategory[] = ["all"]): string {
   const isAll = categories.includes("all");
@@ -324,9 +340,11 @@ export function getRandomWord(allowAdult: boolean = false, categories: WordCateg
 
   const pick = eligible[Math.floor(Math.random() * eligible.length)];
   usedIndices.add(pick.index);
+  saveUsed();
   return pick.word;
 }
 
 export function resetWords() {
   usedIndices = new Set<number>();
+  saveUsed();
 }
