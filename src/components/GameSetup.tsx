@@ -339,6 +339,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                     <input
                       value={p}
                       onChange={(e) => updatePlayer("a", i, e.target.value)}
+                      onFocus={(e) => e.target.select()}
                       placeholder="Type player name"
                       className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-a/50 placeholder:text-muted-foreground/60 placeholder:italic"
                     />
@@ -384,6 +385,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
                     <input
                       value={p}
                       onChange={(e) => updatePlayer("b", i, e.target.value)}
+                      onFocus={(e) => e.target.select()}
                       placeholder="Type player name"
                       className="flex-1 w-full bg-muted rounded-md px-3 py-2 pr-8 text-sm outline-none focus:ring-2 focus:ring-team-b/50 placeholder:text-muted-foreground/60 placeholder:italic"
                     />
