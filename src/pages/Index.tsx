@@ -1,6 +1,5 @@
 import { useState, useCallback, useEffect } from "react";
 import { GameState, DEFAULT_GAME_STATE } from "@/lib/gameTypes";
-import { resetWords } from "@/lib/words";
 import GameSetup from "@/components/GameSetup";
 import ReadyScreen from "@/components/ReadyScreen";
 import GamePlay from "@/components/GamePlay";

@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react";
 import { GameState, DEFAULT_GAME_STATE, WordCategory, CATEGORY_LABELS } from "@/lib/gameTypes";
-import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert, Trophy, Ban } from "lucide-react";
+import { Plus, X, Users, Timer, Zap, Tags, BookOpen, Check, WifiOff, Flame, Pencil, RotateCcw, MessageCircle, Sparkles, PartyPopper, ScrollText, ShieldAlert, Trophy, Ban, SkipForward } from "lucide-react";
 import { Switch } from "@/components/ui/switch";
 import ThemeToggle from "@/components/ThemeToggle";
 import InstallPrompt from "@/components/InstallPrompt";
@@ -41,6 +41,7 @@ interface SavedSettings {
   totalRounds?: number;
   selectedCategories?: WordCategory[];
   adultMode?: boolean;
+  allowSkip?: boolean;
 }
 
 const loadSavedSettings = (): SavedSettings | null => {
@@ -64,15 +65,16 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   const [totalRounds, setTotalRounds] = useState(saved?.totalRounds ?? 5);
   const [selectedCategories, setSelectedCategories] = useState<WordCategory[]>(saved?.selectedCategories ?? ["all"]);
   const [adultMode, setAdultMode] = useState(saved?.adultMode ?? false);
+  const [allowSkip, setAllowSkip] = useState(saved?.allowSkip ?? false);
 
   useEffect(() => {
     try {
       localStorage.setItem(
         PLAYERS_STORAGE_KEY,
-        JSON.stringify({ teamAName, teamBName, teamAPlayers, teamBPlayers, roundTime, wordsPerTurn, totalRounds, selectedCategories, adultMode }),
+        JSON.stringify({ teamAName, teamBName, teamAPlayers, teamBPlayers, roundTime, wordsPerTurn, totalRounds, selectedCategories, adultMode, allowSkip }),
       );
     } catch {}
-  }, [teamAName, teamBName, teamAPlayers, teamBPlayers, roundTime, wordsPerTurn, totalRounds, selectedCategories, adultMode]);
+  }, [teamAName, teamBName, teamAPlayers, teamBPlayers, roundTime, wordsPerTurn, totalRounds, selectedCategories, adultMode, allowSkip]);
 
   const resetToDefaults = () => {
     setTeamAName("Team Fire");
@@ -84,6 +86,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
     setTotalRounds(5);
     setSelectedCategories(["all"]);
     setAdultMode(false);
+    setAllowSkip(false);
     try {
       localStorage.removeItem(PLAYERS_STORAGE_KEY);
     } catch {}
@@ -151,6 +154,7 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
       totalRounds,
       adultMode,
       selectedCategories,
+      allowSkip,
       phase: "ready",
     };
     onStartGame(state);
