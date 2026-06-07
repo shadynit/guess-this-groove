@@ -93,8 +93,8 @@ export default function GameSetup({ onStartGame }: GameSetupProps) {
   };
 
   const addPlayer = (team: "a" | "b") => {
-    if (team === "a") setTeamAPlayers([...teamAPlayers, ""]);
-    else setTeamBPlayers([...teamBPlayers, ""]);
+    if (team === "a") setTeamAPlayers([...teamAPlayers, `Player ${teamAPlayers.length + 1}`]);
+    else setTeamBPlayers([...teamBPlayers, `Player ${teamBPlayers.length + 1}`]);
   };
 
   const removePlayer = (team: "a" | "b", idx: number) => {
